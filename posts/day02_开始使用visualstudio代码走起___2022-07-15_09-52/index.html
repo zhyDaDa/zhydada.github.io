@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Day02_开始使用VisualStudio代码走起">
+<meta itemprop="description" content="主要内容 安装了vs 熟悉VisualStudio 两行代码 熟悉VisualStudio 解决方案包含多个项目, 项目又包含多个类文件 项目中最要紧的是"><meta itemprop="datePublished" content="2022-07-15T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-15T00:00:00+00:00" />
+<meta itemprop="wordCount" content="587">
+<meta itemprop="keywords" content="C井学习笔记,study," /><meta property="og:title" content="Day02_开始使用VisualStudio代码走起" />
+<meta property="og:description" content="主要内容 安装了vs 熟悉VisualStudio 两行代码 熟悉VisualStudio 解决方案包含多个项目, 项目又包含多个类文件 项目中最要紧的是" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhydada.github.io/posts/day02_%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8visualstudio%E4%BB%A3%E7%A0%81%E8%B5%B0%E8%B5%B7___2022-07-15_09-52/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-15T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-15T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Day02_开始使用VisualStudio代码走起"/>
+<meta name="twitter:description" content="主要内容 安装了vs 熟悉VisualStudio 两行代码 熟悉VisualStudio 解决方案包含多个项目, 项目又包含多个类文件 项目中最要紧的是"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest">
+	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="../../favicon.ico">
+
+	<title>Day02_开始使用VisualStudio代码走起</title>
+	<link rel="stylesheet" href="https://zhydada.github.io/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous"/>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5f4bfa208c02f20f2e4ca0719d51fac0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+
+<body id="page">
+	
+<header id="site-header" class="animated slideInUp">
+    <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+            <div class="site-branding">
+                <a href="https://zhydada.github.io">zhyDaDa的个人站点</a>
+            </div>
+            <nav class="site-nav hide-in-mobile">
+                
+				<a href="https://zhydada.github.io/posts/">Posts</a>
+				<a href="https://zhydada.github.io/tags/">Tags</a>
+				<a href="https://zhydada.github.io/about/">About</a>
+
+            </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+            <span class="hdr-social hide-in-mobile"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zhydada@qq.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2402128733&amp;site=qq&amp;menue=yes" target="_blank" rel="noopener me" title="Qq"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path transform="scale(0.04) translate(75 40)" stroke-width="50" d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"></path></svg></a><a href="https://github.com/zhyDaDa" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+    <ul>
+        <li><a href="https://zhydada.github.io/posts/">Posts</a></li>
+        <li><a href="https://zhydada.github.io/tags/">Tags</a></li>
+        <li><a href="https://zhydada.github.io/about/">About</a></li>
+    </ul>
+</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 15, 2022</span></div>
+				<h1>Day02_开始使用VisualStudio代码走起</h1>
+			</header>
+			<div class="content">
+				<h2 id="主要内容">主要内容<a href="#主要内容" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>安装了vs</li>
+<li>熟悉VisualStudio</li>
+<li>两行代码</li>
+</ul>
+<hr>
+<h2 id="熟悉visualstudio">熟悉VisualStudio<a href="#熟悉visualstudio" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li><strong>解决方案</strong>包含多个<strong>项目</strong>, 项目又包含多个<strong>类文件</strong></li>
+<li>项目中最要紧的是program.cs文件</li>
+<li>.cs文件被统称为<strong>类文件</strong></li>
+</ul>
+<blockquote>
+<p><strong>解决方案</strong>就是&quot;公司&quot;<br>
+<strong>项目</strong>就是&quot;部门&quot;<br>
+<strong>类文件</strong>就是&quot;员工&quot;</p>
+</blockquote>
+<ul>
+<li>代码区</li>
+</ul>
+<pre tabindex="0"><code>using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+//以上是引用命名空间
+namespace _01_My_First_Demo //项目名称&amp;命名空间
+{
+    class Program //被class修饰, 说明是个类
+    {
+        static void Main(string[] args) //方法or函数 程序的主入口
+        {  //代码从这里走起
+
+        }
+    }
+}
+</code></pre><blockquote>
+<p>所谓<strong>引用命名空间</strong>其实就是定语</p>
+<blockquote>
+<p>&ldquo;淘宝&rdquo;=&gt;&ldquo;网上项目&rdquo;=&gt;&ldquo;客户类&rdquo;<br>
+&ldquo;京东&rdquo;=&gt;&ldquo;网上项目&rdquo;=&gt;&ldquo;客户类&rdquo;</p>
+</blockquote>
+<p>其中两个&quot;客户类&quot;毫无关联, 前面的定语就是<strong>引用命名空间</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>方法</strong>就是<strong>函数</strong><br>
+<strong>main函数</strong>就是程序的<strong>主入口</strong></p>
+</blockquote>
+<ul>
+<li>在解决方案中
+<ul>
+<li><strong>.suo</strong>是不可以操作的</li>
+<li><strong>.sln</strong>叫做<em>解决方案文件</em>, 包含着解决方案的信息</li>
+</ul>
+</li>
+<li>在项目文件夹中
+<ul>
+<li><strong>.csproj</strong>是<em>项目文件</em>, 包含项目信息</li>
+</ul>
+</li>
+</ul>
+<h2 id="两行代码">两行代码<a href="#两行代码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<pre tabindex="0"><code>Console.WriteLine(&#34;I&#39;m zhyDaDa&#34;);
+Console.ReadKey();
+</code></pre><ul>
+<li>Console.WriteLine(&ldquo;输出内容&rdquo;);</li>
+<li>Console.ReadKey(); 暂停 (约等于bat中的pause)</li>
+</ul>
+<hr>
+<h1 id="总结">总结<a href="#总结" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>大致代码样式get</li>
+<li>以及应用命名空间的概念</li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zhydada.github.io/tags/c%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">C井学习笔记</a></span><span class="tag"><a href="https://zhydada.github.io/tags/study">study</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>587 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-07-15 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://zhydada.github.io/posts/day03_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B9%8B%E6%B3%A8%E9%87%8A%E5%92%8C%E5%8F%98%E9%87%8F___2022-07-17_22-30/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Day03_基础语法之注释和变量</span>
+			</a>
+			<a class="prev-post" href="https://zhydada.github.io/posts/day01_%E4%BA%86%E8%A7%A3c%E4%BA%95%E4%BB%A5%E5%8F%8A.net%E7%9A%84%E5%8A%9F%E8%83%BD___2022-07-14_11-01/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Day01_了解C井以及.Net的功能</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2023 <a href="https://zhydada.github.io">zhyDaDa</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://zhydada.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://zhydada.github.io/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

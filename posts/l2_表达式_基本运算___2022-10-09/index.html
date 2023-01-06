@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="L2_表达式_基本运算___2022-10-09">
+<meta itemprop="description" content="* 对应课程: 2.2.1 ~ 2.2.4 目录 表达式 运算符优先级 交换两个变量 复合赋值 表达式 表达式是一系列运算符和算子的组合, 用来计算一个值 运算符 (operator) 是指进行运算的行为"><meta itemprop="datePublished" content="2022-10-09T22:50:17+08:00" />
+<meta itemprop="dateModified" content="2022-10-09T22:50:17+08:00" />
+<meta itemprop="wordCount" content="667">
+<meta itemprop="keywords" content="C语言学习笔记,study," /><meta property="og:title" content="L2_表达式_基本运算___2022-10-09" />
+<meta property="og:description" content="* 对应课程: 2.2.1 ~ 2.2.4 目录 表达式 运算符优先级 交换两个变量 复合赋值 表达式 表达式是一系列运算符和算子的组合, 用来计算一个值 运算符 (operator) 是指进行运算的行为" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhydada.github.io/posts/l2_%E8%A1%A8%E8%BE%BE%E5%BC%8F_%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97___2022-10-09/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-09T22:50:17+08:00" />
+<meta property="article:modified_time" content="2022-10-09T22:50:17+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="L2_表达式_基本运算___2022-10-09"/>
+<meta name="twitter:description" content="* 对应课程: 2.2.1 ~ 2.2.4 目录 表达式 运算符优先级 交换两个变量 复合赋值 表达式 表达式是一系列运算符和算子的组合, 用来计算一个值 运算符 (operator) 是指进行运算的行为"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest">
+	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="../../favicon.ico">
+
+	<title>L2_表达式_基本运算___2022-10-09</title>
+	<link rel="stylesheet" href="https://zhydada.github.io/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous"/>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5f4bfa208c02f20f2e4ca0719d51fac0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+
+<body id="page">
+	
+<header id="site-header" class="animated slideInUp">
+    <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+            <div class="site-branding">
+                <a href="https://zhydada.github.io">zhyDaDa的个人站点</a>
+            </div>
+            <nav class="site-nav hide-in-mobile">
+                
+				<a href="https://zhydada.github.io/posts/">Posts</a>
+				<a href="https://zhydada.github.io/tags/">Tags</a>
+				<a href="https://zhydada.github.io/about/">About</a>
+
+            </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+            <span class="hdr-social hide-in-mobile"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zhydada@qq.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2402128733&amp;site=qq&amp;menue=yes" target="_blank" rel="noopener me" title="Qq"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path transform="scale(0.04) translate(75 40)" stroke-width="50" d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"></path></svg></a><a href="https://github.com/zhyDaDa" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+    <ul>
+        <li><a href="https://zhydada.github.io/posts/">Posts</a></li>
+        <li><a href="https://zhydada.github.io/tags/">Tags</a></li>
+        <li><a href="https://zhydada.github.io/about/">About</a></li>
+    </ul>
+</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Oct 9, 2022</span></div>
+				<h1>L2_表达式_基本运算___2022-10-09</h1>
+			</header>
+			<div class="content">
+				<p>* 对应课程: 2.2.1 ~ 2.2.4<br>
+目录</p>
+<ul>
+<li><a href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F">表达式</a></li>
+<li><a href="#%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7">运算符优先级</a></li>
+<li><a href="#%E4%BA%A4%E6%8D%A2%E4%B8%A4%E4%B8%AA%E5%8F%98%E9%87%8F">交换两个变量</a></li>
+<li><a href="#%E5%A4%8D%E5%90%88%E8%B5%8B%E5%80%BC">复合赋值</a></li>
+</ul>
+<hr>
+<h2 id="表达式">表达式<a href="#表达式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p><strong>表达式</strong>是一系列运算符和算子的组合, 用来计算一个值</p>
+<ul>
+<li><strong>运算符</strong> <em>(operator)</em> 是指进行运算的行为/动作</li>
+<li><strong>算子</strong> <em>(operand)</em> 是指参与运算的值, 可能是常数/变量/函数的返回值</li>
+</ul>
+<p>举例: 计算时间差</p>
+<blockquote>
+<p>输入两组&quot;小时 时间&quot;, 结果也用相同格式打印出来</p>
+</blockquote>
+<pre tabindex="0"><code>int hour1, minute1;
+int hour2, minute2;
+
+scanf(&#34;%d %d&#34;, &amp;hour1, &amp;minute1);
+scanf(&#34;%d %d&#34;, &amp;hour2, &amp;minute2);
+
+int delta_time = (hour2 - hour1) * 60 + minute2 - minute1;
+printf(&#34;时间差是%d小时%d分钟&#34;, delta_time/60, delta_time%60);
+</code></pre><h2 id="运算符优先级">运算符优先级<a href="#运算符优先级" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>举例: 求平均值</p>
+<blockquote>
+<p>写一个程序, 输俩整数, 输出平均值</p>
+</blockquote>
+<pre tabindex="0"><code>int a,b;
+printf(&#34;输入两个整数, 用空格空开\n&#34;);
+scanf(&#34;%d %d&#34;, &amp;a, &amp;b);
+double c = (a+b)/2.0;
+printf(&#34;%d和%d的平均值=%f\n&#34;, a, b, c);
+</code></pre><p><strong>注意:</strong></p>
+<ul>
+<li>两个算子的运算符属于 <strong>双目运算符</strong>, 比如<code>a+b</code><br>
+类似的, 只有一个算子的成为的 <strong>单目运算符</strong>, 比如<code>a*-b</code><br>
+这种情况下, 运算符<code>-</code>对应的运算称为 <strong>&ldquo;单目取负&rdquo;</strong>, 其<u>优先级高于乘法</u></li>
+<li>在C语言中, <strong>赋值运算符</strong> <code>=</code> 被视作运算符, 而非特殊动作
+<ul>
+<li>即, 赋值也属于运算, 也有结果</li>
+<li><code>a=6</code>的结果是<code>6</code></li>
+<li><code>a=b=6;</code>
+<ul>
+<li>等价于<code>a=(b=6);</code></li>
+<li>等价于<code>b=6; a=b;</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="交换两个变量">交换两个变量<a href="#交换两个变量" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>经典中的经典了</p>
+<pre tabindex="0"><code>int a = 5;
+int b = 6;
+int t;
+
+t=a;
+a=b;
+b=t;
+
+printf(&#34;a=%d; b=%d&#34;,a,b);
+</code></pre><p>经典方法二</p>
+<pre tabindex="0"><code>int a = 5;
+int b = 6;
+
+a = b - a;
+b = b - a;
+a = a + b;
+
+printf(&#34;a=%d; b=%d&#34;,a,b);
+</code></pre><h2 id="复合赋值">复合赋值<a href="#复合赋值" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>形如<code>+=</code> <code>-=</code> <code>*=</code> <code>/=</code> 和 <code>%=</code>的运算符称为 <strong>复合运算符</strong></p>
+<blockquote>
+<p><code>total+=12;</code><br>
+等价于<br>
+<code>total = total + 12;</code></p>
+</blockquote>
+<p><code>++</code> 和 <code>--</code> 是特殊的单目运算符, 称为 <strong>递增运算符</strong> 和 <strong>递减运算符</strong><br>
+该运算符放在算子的前后分别叫做 <strong>前缀形式</strong> 和 <strong>后缀形式</strong><br>
+其中:</p>
+<ul>
+<li>前缀得到的是运算之后的值</li>
+<li>后缀可以理解为 <em>&ldquo;副作用&rdquo;</em>, 得到的是运算前的值(之后再加加减减)</li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zhydada.github.io/tags/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">C语言学习笔记</a></span><span class="tag"><a href="https://zhydada.github.io/tags/study">study</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>667 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-10-09 22:50 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://zhydada.github.io/posts/l3_%E5%81%9A%E5%88%A4%E6%96%AD___2022-10-11/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>L3_做判断___2022-10-11</span>
+			</a>
+			<a class="prev-post" href="https://zhydada.github.io/posts/l1_%E6%A2%A6%E5%BC%80%E5%A7%8B%E7%9A%84%E5%9C%B0%E6%96%B9_%E5%8F%98%E9%87%8F___2022-10-07/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>L1_梦开始的地方_变量___2022-10-07</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2023 <a href="https://zhydada.github.io">zhyDaDa</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://zhydada.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://zhydada.github.io/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    <title>生成随机数工具</title>
+    <meta name="keywords" content="随机数字生成" />
+    <meta name="description" content="桌游骰子专用" />
+    <meta name="Author" Content="zhyDaDa">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+    <link rel="stylesheet" type="text/css" href="http://zhyDaDa.github.io/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="http://zhyDaDa.github.io/css/font-awesome.min.css">
+    <script type="text/javascript" src="http://zhyDaDa.github.io/js/jquery.js"></script>
+    <script type="text/javascript" src="http://zhyDaDa.github.io/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://zhyDaDa.github.io/js/layer.js"></script>
+
+    <style>
+        .container{
+            margin-top: 32px;
+        }
+        .tool-body{
+            opacity: .88;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background" style="width: 1980px; height: 1080px;position: fixed;top: 0px;left: 0px;z-index: -99;"><svg
+            xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+            style="margin:auto;background:#ffffff;display:block;z-index:1;position:relative" width="1980" height="1080"
+            preserveAspectRatio="xMidYMid" viewBox="0 0 1980 1080">
+            <g transform="translate(990,540) scale(1,1) translate(-990,-540)">
+                <linearGradient id="ldbk-kegl7cui4y" x1="-0.1" y1="0" x2="1.1" y2="1">
+                    <animate attributeName="y2" repeatCount="indefinite" dur="3.3333333333333335s" keyTimes="0;0.5;1"
+                        values="-0.5;0.5;-0.5" keySplines="0.5 0 0.5 1;0.5 0 0.5 1" calcMode="spline"></animate>
+                    <stop stop-color="#5affd5" offset="0"></stop>
+                    <stop stop-color="#56a2ff" offset="1"></stop>
+                </linearGradient>
+                <rect x="0" y="0" width="1980" height="1080" fill="url(#ldbk-kegl7cui4y)"></rect>
+            </g>
+        </svg></div>
+    <div class="container">
+        <div class="panel panel-default">
+            <div class="panel-heading">随机数生成器</div>
+            <div class="panel-body tool-body">
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">最小值</span>
+                        <input type="number" id="ran-num-min" class="form-control" min="0" value="1">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">最大值</span>
+                        <input type="number" id="ran-num-max" class="form-control" min="0" value="6">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button id="generate-ran-num" class="btn btn-success">生成随机数</button>
+                </div>
+                <textarea id="ran-num-output" class="form-control" cols="40" rows="7" readonly></textarea>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">随机密码生成器</div>
+            <div class="panel-body tool-body">
+                <div class="form-group">
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="include_number" checked>数字
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="include_lowercaseletters" checked>小写字母
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="include_uppercaseletters" checked>大写字母
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="include_punctuation">标点符号
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" id="password_unique">字符不重复
+                    </label>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">密码长度</span>
+                        <input type="number" id="password_length" class="form-control" min="0" value="8">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon">密码数量</span>
+                        <input type="number" id="password_quantity" class="form-control" min="0" value="5">
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <button id="generate" class="btn btn-success">生成密码</button>
+                </div>
+                <textarea id="output" class="form-control" cols="40" rows="7" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let $includeNumber = document.getElementById("include_number"),
+            $includeLowercaseletters = document.getElementById("include_lowercaseletters"),
+            $includeUppercaseletters = document.getElementById("include_uppercaseletters"),
+            $includePunctuation = document.getElementById("include_punctuation"),
+            $passwordUnique = document.getElementById("password_unique"),
+            $passwordLength = document.getElementById("password_length"),
+            $passwordQuantity = document.getElementById("password_quantity"),
+            $generate = document.getElementById("generate"),
+            $output = document.getElementById("output");
+
+        function rand(max) {
+            return Math.floor(Math.random() * max);
+        };
+
+        $generate.onclick = function () {
+            var chars = "";
+
+            if ($includeNumber.checked) chars += "0123456789";
+            if ($includeLowercaseletters.checked) chars += "abcdefghijklmnopqrstuvwxyz";
+            if ($includeUppercaseletters.checked) chars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            if ($includePunctuation.checked) chars += "`~!@#$%^&*()-_=+[{]}\|;:'\",<.>/?";
+
+            var passwords = [],
+                passwordUnique = $passwordUnique.checked;
+            for (var i = 0,
+                    l = $passwordQuantity.value; i < l; i++) {
+                var _chars = chars.split(""),
+                    password = "";
+                for (var j = 0,
+                        k = $passwordLength.value; j < k; j++) {
+                    if (_chars.length < 1) break;
+                    var index = rand(_chars.length);
+                    password += _chars[index];
+                    if (passwordUnique) _chars.splice(index, 1);
+                };
+                passwords.push(password);
+            };
+            $output.value = passwords.join("\n");
+        };
+
+        $output.onfocus = function () {
+            this.select();
+        }
+    </script>
+</body>
+    <script>
+        let $min_ran = document.getElementById("ran-num-min"),
+            $max_ran = document.getElementById("ran-num-max"),
+            $generate_ran = document.getElementById("generate-ran-num"),
+            $output_ran = document.getElementById("ran-num-output");
+
+        function GetRan(min, max) {
+            return (Math.random() * (max - min + 1) + min) >> 0;
+        };
+
+        $generate_ran.onclick = function () {
+            $output_ran.value = "";
+            for (var i = 0; i < 5; i++) {
+                $output_ran.value += GetRan($min_ran.value*1, $max_ran.value*1);
+                $output_ran.value += "\n";
+            }
+        }
+
+        $output_ran.onfocus = function () {
+            this.select();
+        }
+    </script>
+
+</html>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>work on zhyDaDa的个人站点</title>
+    <link>https://zhydada.github.io/tags/work/</link>
+    <description>Recent content in work on zhyDaDa的个人站点</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Thu, 27 Oct 2022 19:38:10 +0800</lastBuildDate><atom:link href="https://zhydada.github.io/tags/work/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>自定义油猴脚本</title>
+      <link>https://zhydada.github.io/posts/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</link>
+      <pubDate>Thu, 27 Oct 2022 19:38:10 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/%E8%87%AA%E5%AE%9A%E4%B9%89%E6%B2%B9%E7%8C%B4%E8%84%9A%E6%9C%AC/</guid>
+      <description>目录 自定义脚本 脚本推荐 油猴脚本 自定义脚本 以下是本人自己写/修改的一些脚本, 从这些url可以安装使用 由于要应对个性化需求, 有好的想法可以联系我</description>
+    </item>
+    
+    <item>
+      <title>背书机mobile</title>
+      <link>https://zhydada.github.io/posts/%E8%83%8C%E4%B9%A6%E6%9C%BAmobile/</link>
+      <pubDate>Tue, 25 Oct 2022 19:07:09 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/%E8%83%8C%E4%B9%A6%E6%9C%BAmobile/</guid>
+      <description>自制背书机上线了! 点我跳转 mobile版 针对手机端做出大改, 所有的板块也基本改成了错题本的形式, 任意添加 终于也是完成了存档的机制, 可以不用怕</description>
+    </item>
+    
+    <item>
+      <title>小工具</title>
+      <link>https://zhydada.github.io/posts/%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Wed, 17 Aug 2022 15:32:08 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+      <description>说明 用于特定用途的实用工具, 功能较为简易 部分有抄袭/借鉴, 如站长工具, 侵删 一览表(点击名称跳转) 名称 功能 随机数 生成随机数, 也夹带了随机密码的</description>
+    </item>
+    
+    <item>
+      <title>2048</title>
+      <link>https://zhydada.github.io/posts/2048/</link>
+      <pubDate>Tue, 02 Aug 2022 23:05:34 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/2048/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 手机端入口, 但目前只能玩经典模式, 触控按钮隐藏在图示的四个标红区域 操作提示: 按K键可以展示每个按键对</description>
+    </item>
+    
+    <item>
+      <title>Tetris</title>
+      <link>https://zhydada.github.io/posts/tetris/</link>
+      <pubDate>Tue, 02 Aug 2022 21:53:31 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/tetris/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 可能需要手动调整界面的缩放 简介 内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择</description>
+    </item>
+    
+    <item>
+      <title>Jumpin Ball V1</title>
+      <link>https://zhydada.github.io/posts/jumpin-ball-v1/</link>
+      <pubDate>Mon, 01 Aug 2022 21:33:53 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/jumpin-ball-v1/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 简介 名称: 高中阶段制作的一款横版跳跃游戏, 游戏名来自jc同学, 中文名暂且称为&amp;quot;横版跳跃&amp;q</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="L6_函数___2022-11-07">
+<meta itemprop="description" content="目录 引入 定义与使用 什么是函数? 函数的定义 函数的调用 函数的返回 函数的原型 函数定义与调用先后关系的讲究 函数的原型与声明 参数传递 类型不匹配 传参 本地"><meta itemprop="datePublished" content="2022-11-07T22:08:39+08:00" />
+<meta itemprop="dateModified" content="2022-11-07T22:08:39+08:00" />
+<meta itemprop="wordCount" content="2797">
+<meta itemprop="keywords" content="C语言学习笔记,study," /><meta property="og:title" content="L6_函数___2022-11-07" />
+<meta property="og:description" content="目录 引入 定义与使用 什么是函数? 函数的定义 函数的调用 函数的返回 函数的原型 函数定义与调用先后关系的讲究 函数的原型与声明 参数传递 类型不匹配 传参 本地" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhydada.github.io/posts/l6_%E5%87%BD%E6%95%B0___2022-11-07/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-11-07T22:08:39+08:00" />
+<meta property="article:modified_time" content="2022-11-07T22:08:39+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="L6_函数___2022-11-07"/>
+<meta name="twitter:description" content="目录 引入 定义与使用 什么是函数? 函数的定义 函数的调用 函数的返回 函数的原型 函数定义与调用先后关系的讲究 函数的原型与声明 参数传递 类型不匹配 传参 本地"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest">
+	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="../../favicon.ico">
+
+	<title>L6_函数___2022-11-07</title>
+	<link rel="stylesheet" href="https://zhydada.github.io/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous"/>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5f4bfa208c02f20f2e4ca0719d51fac0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+
+<body id="page">
+	
+<header id="site-header" class="animated slideInUp">
+    <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+            <div class="site-branding">
+                <a href="https://zhydada.github.io">zhyDaDa的个人站点</a>
+            </div>
+            <nav class="site-nav hide-in-mobile">
+                
+				<a href="https://zhydada.github.io/posts/">Posts</a>
+				<a href="https://zhydada.github.io/tags/">Tags</a>
+				<a href="https://zhydada.github.io/about/">About</a>
+
+            </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+            <span class="hdr-social hide-in-mobile"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zhydada@qq.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2402128733&amp;site=qq&amp;menue=yes" target="_blank" rel="noopener me" title="Qq"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path transform="scale(0.04) translate(75 40)" stroke-width="50" d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"></path></svg></a><a href="https://github.com/zhyDaDa" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+    <ul>
+        <li><a href="https://zhydada.github.io/posts/">Posts</a></li>
+        <li><a href="https://zhydada.github.io/tags/">Tags</a></li>
+        <li><a href="https://zhydada.github.io/about/">About</a></li>
+    </ul>
+</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Nov 7, 2022</span></div>
+				<h1>L6_函数___2022-11-07</h1>
+			</header>
+			<div class="content">
+				<p>目录</p>
+<ul>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E5%AE%9A%E4%B9%89%E4%B8%8E%E4%BD%BF%E7%94%A8">定义与使用</a>
+<ul>
+<li><a href="#%E4%BB%80%E4%B9%88%E6%98%AF%E5%87%BD%E6%95%B0">什么是函数?</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%AE%9A%E4%B9%89">函数的定义</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%B0%83%E7%94%A8">函数的调用</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E8%BF%94%E5%9B%9E">函数的返回</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B">函数的原型</a>
+<ul>
+<li><a href="#%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%B0%83%E7%94%A8%E5%85%88%E5%90%8E%E5%85%B3%E7%B3%BB%E7%9A%84%E8%AE%B2%E7%A9%B6">函数定义与调用先后关系的讲究</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9E%8B%E4%B8%8E%E5%A3%B0%E6%98%8E">函数的原型与声明</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">参数传递</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%9E%8B%E4%B8%8D%E5%8C%B9%E9%85%8D">类型不匹配</a></li>
+<li><a href="#%E4%BC%A0%E5%8F%82">传参</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F">本地变量</a>
+<ul>
+<li><a href="#%E5%8F%98%E9%87%8F%E7%9A%84%E7%94%9F%E5%AD%98%E6%9C%9F%E5%92%8C%E4%BD%9C%E7%94%A8%E5%9F%9F">变量的生存期和作用域</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E5%8F%98%E9%87%8F%E7%9A%84%E8%A7%84%E5%88%99">本地变量的规则</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A1%A5%E5%85%85">补充</a>
+<ul>
+<li><a href="#%E5%AE%9A%E4%B9%89%E6%97%A0%E5%8F%82%E6%95%B0%E7%9A%84%E5%87%BD%E6%95%B0">定义无参数的函数</a></li>
+<li><a href="#%E9%80%97%E5%8F%B7%E8%BF%90%E7%AE%97%E7%AC%A6">逗号运算符</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E9%87%8C%E7%9A%84%E5%87%BD%E6%95%B0">函数里的函数</a></li>
+<li><a href="#%E5%A5%87%E5%BD%A2%E6%80%AA%E7%8A%B6">奇形怪状</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8Emain%E5%87%BD%E6%95%B0">关于main函数</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="引入">引入<a href="#引入" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>求 0-10 和 20-30 和 35-45 的和</p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void main()
+{
+    int i, sum;
+    for (sum = 0, i = 1; i &lt;= 10; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, 1, 10, sum);
+
+    for (sum = 0, i = 20; i &lt;= 30; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, 20, 30, sum);
+
+    for (sum = 0, i = 35; i &lt;= 45; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, 35, 45, sum);
+}
+</code></pre><blockquote>
+<p><strong>代码复制</strong>是程序<strong>质量不良</strong>的表现!</p>
+<blockquote>
+<p>这是因为以后做代码维护的时候要修改很多处</p>
+</blockquote>
+</blockquote>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void sum(int begin, int end){
+    int i;
+    int sum = 0;
+    for (i = begin; i &lt;= end; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, begin, end, sum);
+}
+
+void main()
+{
+    sum(1, 10);
+    sum(20, 30);
+    sum(35, 45);
+}
+</code></pre><p>将重复部分提取出来, 方便以后的调用</p>
+<h2 id="定义与使用">定义与使用<a href="#定义与使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h3 id="什么是函数">什么是函数?<a href="#什么是函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<blockquote>
+<p>函数是一块代码, 接收<strong>零个或多个</strong>值, <em>做一件事情</em>, 并返回<strong>零个或一个</strong>值</p>
+</blockquote>
+<h3 id="函数的定义">函数的定义<a href="#函数的定义" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre tabindex="0"><code>void sum(int begin, int end){
+    int i;
+    int sum = 0;
+    for (i = begin; i &lt;= end; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, begin, end, sum);
+}
+</code></pre><blockquote>
+<p><em><strong>void</strong></em> 是返回类型<br>
+<em><strong>sum</strong></em> 是函数名<br>
+<em><strong>int begin, int end</strong></em> 是参数表<br>
+<em><strong>花括号内的代码块</strong></em> 称为函数体</p>
+</blockquote>
+<h3 id="函数的调用">函数的调用<a href="#函数的调用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<pre tabindex="0"><code>函数名(参数值)
+</code></pre><p><strong>注意</strong>: <code>()</code>起到了<strong>重要</strong>的作用</p>
+<ul>
+<li><code>()</code>表示前面的表达式是一个函数并且在调用ta, 而不是一个<em>函数指针</em></li>
+<li>即便没有参数也要<code>()</code></li>
+<li>有参数的话, 需要给出正确的 <strong>数量和顺序</strong></li>
+<li>这些值会<strong>按照顺序</strong>给函数参数表中的参数(相当于变量)<strong>初始化赋值</strong></li>
+</ul>
+<h3 id="函数的返回">函数的返回<a href="#函数的返回" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>函数<em>知道</em>每一次是哪里调用了ta, 会返回到正确的地方</p>
+<h2 id="函数的原型">函数的原型<a href="#函数的原型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h3 id="函数定义与调用先后关系的讲究">函数定义与调用先后关系的讲究<a href="#函数定义与调用先后关系的讲究" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>要在调用函数<strong>的上面</strong>定义函数, 原因如下:</p>
+<ul>
+<li>C的编译器以<strong>自上而下</strong>的顺序分析代码</li>
+<li>在遇到调用的函数的时候, ta需要知道其定义</li>
+<li>即, 参数的 个数/类型/顺序</li>
+<li>这样才能检查调用是否正确</li>
+</ul>
+<p>如果定义语句放在调用之下(且不做声明), 其结果要视<strong>编译器</strong>而定</p>
+<p>比如, 如下的代码会发出<strong>警告</strong>, 在某些<em>严格</em>的编译器上甚至会出现<strong>编译失败</strong></p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void main()
+{
+    sum(1, 10);
+    sum(20, 30);
+    sum(35, 45);
+}
+
+void sum(int begin, int end)
+{
+    int i;
+    int sum = 0;
+    for (i = begin; i &lt;= end; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, begin, end, sum);
+}
+</code></pre><blockquote>
+<p>原因: 当编译器读到调用位置时, 会做出猜测, ta猜测<code>sum</code>函数的<strong>声明</strong>是如下的样子</p>
+<blockquote>
+<p><code>int sum (int, int)</code></p>
+</blockquote>
+<p>但当ta读到<code>sum</code>的<strong>定义</strong>时发现与之不符, 于是报出了<em>类型冲突</em>的警告<br>
+不过有些高级编译器能自行纠正, 仍旧能正确运行代码</p>
+</blockquote>
+<p>联系上述分析, 如果做出如下修改就可以正确运行</p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void main()
+{
+    sum(1, 10);
+    sum(20, 30);
+    sum(35, 45);
+}
+
+int sum(int begin, int end)
+{
+    int i;
+    int sum = 0;
+    for (i = begin; i &lt;= end; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, begin, end, sum);
+    return sum;
+}
+</code></pre><blockquote>
+<p>不过, 编译器仍旧会报出形如 <em>&ldquo;这个声明是我自己猜的哈&rdquo;</em> 这样的<em><strong>warning</strong></em></p>
+</blockquote>
+<h3 id="函数的原型与声明">函数的原型与声明<a href="#函数的原型与声明" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>函数的<strong>原型</strong>用于告诉编译器一个函数的<em>长相</em>, 包括:</p>
+<ul>
+<li>名称</li>
+<li>参数(数量以及类型)</li>
+<li>返回类型</li>
+</ul>
+<p>函数的<strong>声明</strong>就是展示函数原型的语句<br>
+通俗来讲, <strong>声明</strong>就是告诉编译器 <em>&ldquo;你不用猜了&rdquo;</em></p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void sum(int begin, int end);
+
+void main()
+{
+    sum(1, 10);
+    sum(20, 30);
+    sum(35, 45);
+}
+
+void sum(int begin, int end)
+{
+    int i;
+    int sum = 0;
+    for (i = begin; i &lt;= end; i++)
+    {
+        sum += i;
+    }
+    printf(&#34;%d到%d的和是%d\n&#34;, begin, end, sum);
+}
+</code></pre><p><strong>注意</strong>:</p>
+<ul>
+<li>函数在<strong>声明</strong>之后, 遇到<strong>定义</strong>时, 会再次检验两者是否一致</li>
+<li>现在的编程习惯是将函数的原型声明写在调用位置函数的<strong>外面</strong></li>
+<li>原型中可以不用写函数的名称(即便与定义不一样也不会<em><strong>warning</strong></em>), 但一般仍旧会写上(这对于人类阅读者是有意义的)</li>
+</ul>
+<h2 id="参数传递">参数传递<a href="#参数传递" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>可以传递给函数的值是<strong>表达式的结果</strong>, 这就包括了:</p>
+<ul>
+<li>字面量</li>
+<li>变量</li>
+<li>函数的返回值</li>
+<li>计算的结果</li>
+</ul>
+<h3 id="类型不匹配">类型不匹配<a href="#类型不匹配" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>调用函数时给的值与参数类型<strong>不匹配</strong>是C语言传统上<strong>最大的漏洞</strong><br>
+编译器会<em>自作主张</em>地帮你转换类型, 但总会<strong>不尽如人意</strong></p>
+<h3 id="传参">传参<a href="#传参" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>C语言在调用函数的时候, <strong>永远只能传值给函数</strong><br>
+<strong>注意</strong>: <strong>每个函数都有自己的变量空间</strong><br>
+参数也位于这个独立的空间中, 和其他函数没有关系<br>
+习惯上, 参数表中的参数称作 <strong>&ldquo;形参&rdquo;</strong> , 调用函数时传入的是 <strong>&ldquo;实参&rdquo;</strong><br>
+但容易产生误解, 误认为把参数传给了函数<br>
+因此, 推荐称他们 <strong>&ldquo;参数&rdquo;</strong> 和 <strong>&ldquo;值&rdquo;</strong></p>
+<h2 id="本地变量">本地变量<a href="#本地变量" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<p>函数的每次运行, 就会产生一个独立的 <strong>变量空间</strong><br>
+在这个空间中的变量是只有这次运行独有的, 称作 <strong>本地变量</strong>(也可以成为<em>局部变量/自动变量</em>)</p>
+<blockquote>
+<p>之所以有<em>局部和本地</em>的区别是因为英文都是<em>local</em><br>
+之所以叫<em>自动变量</em>, 是因为ta的<em>生存期</em>是自动的</p>
+</blockquote>
+<p><strong>注意</strong>:</p>
+<ul>
+<li>定义在<em>函数内部</em>的变量就是本地变量</li>
+<li><em>参数</em>也是本地变量</li>
+</ul>
+<h3 id="变量的生存期和作用域">变量的生存期和作用域<a href="#变量的生存期和作用域" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p><strong>生存期</strong> 变量开始出现到消亡<br>
+<strong>作用域</strong> 在(代码的)什么范围内可以访问这个变量(即<em>可以其作用</em>)<br>
+<strong>块</strong> 即一对大括号内的范围</p>
+<pre tabindex="0"><code>#include &lt;stdio.h&gt;
+void swap(int x, int y)
+{
+    int t = x;
+    x = y;
+    y = t;
+}
+void main()
+{
+    int a = 5, b = 6;
+    swap(a, b);
+    printf(&#34;a=%d, b=%d\n&#34;, a, b);
+}
+</code></pre><p>上述函数的结果是: 
+<code>a=5, b=6</code></p>
+<blockquote>
+<p>当进入swap函数的时候:</p>
+<blockquote>
+<p><code>a</code>和<code>b</code>仍旧存在, 即在生存期内<br>
+但<code>a</code>和<code>b</code>不在作用域内, 无法在当前上下文去访问他们</p>
+</blockquote>
+<blockquote>
+<p>作为<strong>生存</strong>来说, 他们还在<br>
+作为<strong>作用</strong>来说, 他们不在当前作用域内</p>
+</blockquote>
+<p>当返回main函数的时候:</p>
+<blockquote>
+<p><code>t</code>和<code>x</code>和<code>y</code>都不存在了<br>
+因为<code>swap</code>函数的运行已经结束了</p>
+</blockquote>
+</blockquote>
+<h3 id="本地变量的规则">本地变量的规则<a href="#本地变量的规则" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ol>
+<li>本地变量是定义在块内的</li>
+</ol>
+<ul>
+<li>既可以定义在<strong>函数</strong>的块内</li>
+<li>也可以定义在<strong>语句</strong>的块内</li>
+</ul>
+<blockquote>
+<p>语句可以是<em><strong>for</strong></em>和<em><strong>if</strong></em>之类<br>
+也可以随意拉一对大括号!</p>
+</blockquote>
+<ol start="2">
+<li>程序运行进入这个块之前, 其中的变量不存在<br>
+离开这个块, 其中的变量就消失了</li>
+<li>块外面定义的变量在里面<strong>仍旧有效</strong></li>
+<li>块里面定义了和外面<strong>同名</strong>的变量, 则以块内的为准(会掩盖外侧的)</li>
+<li>不能在一个块内定义同名的变量</li>
+<li>本地变量不会被默认初始化</li>
+<li>参数在进入函数的时候就被初始化了(一定要给函数参数要求的值 以初始化)</li>
+</ol>
+<h2 id="补充">补充<a href="#补充" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<h3 id="定义无参数的函数">定义无参数的函数<a href="#定义无参数的函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>如果写做<code>void f(void)</code>没有任何问题<br>
+在传统C中, 如果写做<code>void f()</code>, 编译器会认为传参<strong>不确定</strong>, 而非不传参</p>
+<blockquote>
+<p>好心的编译器又会帮你<em>猜想</em>, 然后把事情搞糟<br>
+当然最糟糕的是, <strong>不报错</strong></p>
+</blockquote>
+<p>总之, 写<code>void f(void)</code>不会有错</p>
+<blockquote>
+<p>关于<code>int main()</code>的事儿, 很复杂, 在下面讨论</p>
+</blockquote>
+<h3 id="逗号运算符">逗号运算符<a href="#逗号运算符" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>之前有提到, 逗号<code>,</code>也是一种运算符, 那和调用函数时用到的<code>,</code>如何区分?</p>
+<ul>
+<li><em>调用函数时</em>, 圆括号中的逗号<code>,</code>是<strong>标点符号</strong></li>
+<li>在<em>独立的圆括号</em>内, 表示一个运算式, 此时逗号<code>,</code>是<strong>运算符</strong></li>
+</ul>
+<blockquote>
+<p>两个参数: f(a,b)<br>
+一个参数: f((a,b))</p>
+</blockquote>
+<h3 id="函数里的函数">函数里的函数<a href="#函数里的函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>C语言<strong>不允许函数嵌套定义</strong><br>
+可以在函数里放函数的<strong>声明</strong>, 但不能放ta的<em><strong>BODY</strong></em></p>
+<h3 id="奇形怪状">奇形怪状<a href="#奇形怪状" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p><code>int i, j, sum(int a, int b);</code><br>
+这里定义的<em><strong>sum</strong></em> 函数返回为 <em><strong>int</strong></em><br>
+不算错, 当然不推荐<br>
+<code>return (i)</code><br>
+返回 <em><strong>i</strong></em> 值而已<br>
+但会误使人认为<em><strong>return</strong></em>是一个函数, 因此也不推荐</p>
+<h3 id="关于main函数">关于main函数<a href="#关于main函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>首先, <code>int main()</code>也是一个<strong>函数</strong>, ta被称为程序的入口</li>
+<li>写成<code>int main(void)</code>不会有错</li>
+<li>return 的值是有意义的!!!</li>
+</ul>
+<blockquote>
+<p>在Windows中, 用<em><strong>bat</strong></em>执行这一C语言程序, 会得到return的值<br>
+如果用<code>if errorlevel 1...</code>就可以了解错误原因</p>
+</blockquote>
+<blockquote>
+<p>一般来说, 返回0表示函数正常的运行了<br>
+其他非零返回值用来表明错误原因</p>
+</blockquote>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zhydada.github.io/tags/c%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">C语言学习笔记</a></span><span class="tag"><a href="https://zhydada.github.io/tags/study">study</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>2797 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-11-07 22:08 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://zhydada.github.io/posts/l7_%E6%95%B0%E7%BB%84___2022-11-27/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>L7_数组___2022-11-27</span>
+			</a>
+			<a class="prev-post" href="https://zhydada.github.io/posts/l5_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B___2022-10-28/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>L5_数据类型___2022-10-28</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2023 <a href="https://zhydada.github.io">zhyDaDa</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://zhydada.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://zhydada.github.io/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

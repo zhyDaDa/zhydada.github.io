@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Day04_运算符and变量操作">
+<meta itemprop="description" content="主要内容 赋值运算符 加号的使用 占位符 交换两个变量 赋值运算符 &ldquo;=&rdquo; 表示赋值运算符, 负责将右边的值赋值给左边的变量 由&quot;=&ldquo;连接的"><meta itemprop="datePublished" content="2022-07-19T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-07-19T00:00:00+00:00" />
+<meta itemprop="wordCount" content="512">
+<meta itemprop="keywords" content="C井学习笔记,study," /><meta property="og:title" content="Day04_运算符and变量操作" />
+<meta property="og:description" content="主要内容 赋值运算符 加号的使用 占位符 交换两个变量 赋值运算符 &ldquo;=&rdquo; 表示赋值运算符, 负责将右边的值赋值给左边的变量 由&quot;=&ldquo;连接的" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhydada.github.io/posts/day04_%E8%BF%90%E7%AE%97%E7%AC%A6and%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C___2022-07-19_11-41/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-07-19T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-07-19T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Day04_运算符and变量操作"/>
+<meta name="twitter:description" content="主要内容 赋值运算符 加号的使用 占位符 交换两个变量 赋值运算符 &ldquo;=&rdquo; 表示赋值运算符, 负责将右边的值赋值给左边的变量 由&quot;=&ldquo;连接的"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest">
+	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="../../favicon.ico">
+
+	<title>Day04_运算符and变量操作</title>
+	<link rel="stylesheet" href="https://zhydada.github.io/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous"/>
+	<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5f4bfa208c02f20f2e4ca0719d51fac0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+
+<body id="page">
+	
+<header id="site-header" class="animated slideInUp">
+    <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+            <div class="site-branding">
+                <a href="https://zhydada.github.io">zhyDaDa的个人站点</a>
+            </div>
+            <nav class="site-nav hide-in-mobile">
+                
+				<a href="https://zhydada.github.io/posts/">Posts</a>
+				<a href="https://zhydada.github.io/tags/">Tags</a>
+				<a href="https://zhydada.github.io/about/">About</a>
+
+            </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+            <span class="hdr-social hide-in-mobile"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zhydada@qq.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2402128733&amp;site=qq&amp;menue=yes" target="_blank" rel="noopener me" title="Qq"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path transform="scale(0.04) translate(75 40)" stroke-width="50" d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"></path></svg></a><a href="https://github.com/zhyDaDa" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+    <ul>
+        <li><a href="https://zhydada.github.io/posts/">Posts</a></li>
+        <li><a href="https://zhydada.github.io/tags/">Tags</a></li>
+        <li><a href="https://zhydada.github.io/about/">About</a></li>
+    </ul>
+</div>
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 19, 2022</span></div>
+				<h1>Day04_运算符and变量操作</h1>
+			</header>
+			<div class="content">
+				<h2 id="主要内容">主要内容<a href="#主要内容" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>赋值运算符</li>
+<li>加号的使用</li>
+<li>占位符</li>
+<li>交换两个变量</li>
+</ul>
+<hr>
+<h2 id="赋值运算符">赋值运算符<a href="#赋值运算符" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>&ldquo;=&rdquo; 表示<strong>赋值运算符</strong>, 负责将右边的值赋值给左边的变量<br>
+由&quot;=&ldquo;连接的表达式称之为<strong>赋值表达式</strong></li>
+<li><strong>注意:</strong> 每个表达式都只能求解一个定值</li>
+</ul>
+<h2 id="加号的使用">加号的使用<a href="#加号的使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>起到连接和相加的作用
+<ul>
+<li>当+的一边有字符串的时候, 起到<strong>连接</strong>的作用</li>
+<li>当+的两边都没有有字符串的时候, 起到<strong>相加</strong>的作用</li>
+</ul>
+</li>
+</ul>
+<h2 id="占位符">占位符<a href="#占位符" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li><strong>使用方法:</strong> 先挖坑, 再填个坑</li>
+<li>语法格式:
+<pre tabindex="0"><code>int n1 = 18;
+char n2 = &#34;张&#34;;
+string n3 = &#34;鸿尧&#34;;
+Console.WriteLine(&#34;我姓{1}, 名{2}, 今年{0}岁了&#34;, n1, n2, n3);
+Console.ReadKey();
+</code></pre></li>
+<li><strong>注意:</strong> 挖几个坑, 就要填几个坑<br>
+<strong>但是</strong>, 多填效果一样, 且不会报错<br>
+少填就会报错, 出现&quot;异常&rdquo;</li>
+</ul>
+<blockquote>
+<p>&ldquo;异常&quot;是指: 语法上不出现问题, 只不过程序运行期间, 由于某些原因出现问题, 使程序不能再正常的运行</p>
+</blockquote>
+<blockquote>
+<p>可以理解为Bug</p>
+</blockquote>
+<ul>
+<li>还需要注意: 按照挖坑的顺序输出, 即每个占位符对应的顺序</li>
+<li>此外: 占位符的数字必须满足 <strong>在0和参数数量之间的整数</strong></li>
+</ul>
+<h2 id="交换两个变量">交换两个变量<a href="#交换两个变量" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li><strong>法1:</strong> 第三方</li>
+</ul>
+<pre tabindex="0"><code>int n1 = 10;
+int n2 = 20;
+
+int temp;
+temp = n1;
+n1 = n2;
+n2 = temp;
+</code></pre><ul>
+<li><strong>法2:</strong> 运算</li>
+</ul>
+<pre tabindex="0"><code>int n1 = 10;
+int n2 = 20;
+
+n1 = n1 - n2;
+n2 = n1 + n2;
+n1 = n2 - n1;
+</code></pre><blockquote>
+<p>开发的时候使用 法1<br>
+面试的时候使用 法2</p>
+</blockquote>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zhydada.github.io/tags/c%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0">C井学习笔记</a></span><span class="tag"><a href="https://zhydada.github.io/tags/study">study</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>512 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-07-19 08:00 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://zhydada.github.io/posts/day05_%E6%8E%A5%E5%8F%97%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5_%E5%9F%BA%E7%A1%80%E7%AC%A6%E5%8F%B7_%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2___2022-07-20_13-07/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Day05_接受用户输入_基础符号_类型转换</span>
+			</a>
+			<a class="prev-post" href="https://zhydada.github.io/posts/day03_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B9%8B%E6%B3%A8%E9%87%8A%E5%92%8C%E5%8F%98%E9%87%8F___2022-07-17_22-30/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Day03_基础语法之注释和变量</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2023 <a href="https://zhydada.github.io">zhyDaDa</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://zhydada.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://zhydada.github.io/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

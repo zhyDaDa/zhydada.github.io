@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Tetris">
+<meta itemprop="description" content="游戏入口 务必使用电脑pc端, 点我开始游戏 可能需要手动调整界面的缩放 简介 内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择"><meta itemprop="datePublished" content="2022-08-02T21:53:31+08:00" />
+<meta itemprop="dateModified" content="2022-08-02T21:53:31+08:00" />
+<meta itemprop="wordCount" content="646"><meta itemprop="image" content="https://zhydada.github.io/Tetris/screen-shots/1.png">
+<meta itemprop="keywords" content="game,work," /><meta property="og:title" content="Tetris" />
+<meta property="og:description" content="游戏入口 务必使用电脑pc端, 点我开始游戏 可能需要手动调整界面的缩放 简介 内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://zhydada.github.io/posts/tetris/" /><meta property="og:image" content="https://zhydada.github.io/Tetris/screen-shots/1.png" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-08-02T21:53:31+08:00" />
+<meta property="article:modified_time" content="2022-08-02T21:53:31+08:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://zhydada.github.io/Tetris/screen-shots/1.png"/>
+
+<meta name="twitter:title" content="Tetris"/>
+<meta name="twitter:description" content="游戏入口 务必使用电脑pc端, 点我开始游戏 可能需要手动调整界面的缩放 简介 内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="../../apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="../../favicon-16x16.png">
+	<link rel="manifest" href="../../site.webmanifest">
+	<link rel="mask-icon" href="../../safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="../../favicon.ico">
+
+	<title>Tetris</title>
+	<link rel="stylesheet" href="https://zhydada.github.io/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous"/>
+	<style>.bg-img {background-image: url('https://zhydada.github.io/Tetris/screen-shots/1.png');}</style><script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?5f4bfa208c02f20f2e4ca0719d51fac0";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+</head>
+
+<body id="page">
+	
+<header id="site-header" class="animated slideInUp">
+    <div class="hdr-wrapper section-inner">
+        <div class="hdr-left">
+            <div class="site-branding">
+                <a href="https://zhydada.github.io">zhyDaDa的个人站点</a>
+            </div>
+            <nav class="site-nav hide-in-mobile">
+                
+				<a href="https://zhydada.github.io/posts/">Posts</a>
+				<a href="https://zhydada.github.io/tags/">Tags</a>
+				<a href="https://zhydada.github.io/about/">About</a>
+
+            </nav>
+        </div>
+        <div class="hdr-right hdr-icons">
+            <button id="img-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg></button><span class="hdr-social hide-in-mobile"><a href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&amp;email=zhydada@qq.com" target="_blank" rel="noopener me" title="Email"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></a><a href="http://wpa.qq.com/msgrd?v=3&amp;uin=2402128733&amp;site=qq&amp;menue=yes" target="_blank" rel="noopener me" title="Qq"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path transform="scale(0.04) translate(75 40)" stroke-width="50" d="M433.754 420.445c-11.526 1.393-44.86-52.741-44.86-52.741 0 31.345-16.136 72.247-51.051 101.786 16.842 5.192 54.843 19.167 45.803 34.421-7.316 12.343-125.51 7.881-159.632 4.037-34.122 3.844-152.316 8.306-159.632-4.037-9.045-15.25 28.918-29.214 45.783-34.415-34.92-29.539-51.059-70.445-51.059-101.792 0 0-33.334 54.134-44.859 52.741-5.37-.65-12.424-29.644 9.347-99.704 10.261-33.024 21.995-60.478 40.144-105.779C60.683 98.063 108.982.006 224 0c113.737.006 163.156 96.133 160.264 214.963 18.118 45.223 29.912 72.85 40.144 105.778 21.768 70.06 14.716 99.053 9.346 99.704z"></path></svg></a><a href="https://github.com/zhyDaDa" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title=""><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+        </div>
+    </div>
+</header>
+<div id="mobile-menu" class="animated fast">
+    <ul>
+        <li><a href="https://zhydada.github.io/posts/">Posts</a></li>
+        <li><a href="https://zhydada.github.io/tags/">Tags</a></li>
+        <li><a href="https://zhydada.github.io/about/">About</a></li>
+    </ul>
+</div>
+
+	<div class="bg-img"></div>
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Aug 2, 2022</span></div>
+				<h1>Tetris</h1>
+			</header>
+			<div class="content">
+				<h1 id="游戏入口">游戏入口<a href="#游戏入口" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h1>
+<ul>
+<li>务必使用电脑pc端, 点我<a href="http://zhydada.github.io/Tetris/game/">开始游戏</a></li>
+<li>可能需要手动调整界面的缩放</li>
+</ul>
+<h2 id="简介">简介<a href="#简介" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择.</li>
+<li>灵感: 来自本人在日本旅行期间扭蛋得到的<em>俄罗斯方块掌中游戏机</em>, 里面约有20种俄罗斯方块的模式, 虽然大多相似, 但启发我创造了一些可以实际操作的模式<br>
+无论如何, 这对于练习js还是很有帮助的<br>
+原本的思路是照抄网上的canvas, 但在弄清原理后自己用<strong>HTML</strong>实现了, 效果还不赖(p.s.网格都是一个个独立的div, 所以即便是缩放的操作也不会走样)<br>
+背景的动效来源于一个脚本: <a href="https://www.jb51.net/jiaoben/446998.html">jQuery+HTML5+Canvas实现四色3D多边形背景动画特效源码</a><br>
+班上的wcx同学十分喜欢这个游戏, 对原本刺眼的配色提出了建设性建议, <em>thanks</em>!</li>
+<li>特色: 柔和配色 / 险象环生的难度梯度 / 三种模式 / 高分榜 / GM模式(官方开挂)
+<ul>
+<li>增强模式: 加入了5个方块组成的<em>异形</em>
+<img src="http://zhydada.github.io/Tetris/screen-shots/2.png" alt=""></li>
+<li>混沌模式: 开局随机生成灰色方块
+<img src="http://zhydada.github.io/Tetris/screen-shots/3.png" alt=""></li>
+</ul>
+</li>
+</ul>
+<h2 id="历代版本说明">历代版本说明<a href="#历代版本说明" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+<ul>
+<li>
+<p>硬件</p>
+<ol>
+<li>操作优化(运动暂停;Wall Kick)</li>
+<li>分数</li>
+<li>下一个Tetris</li>
+<li>突破性技术:localStorage向数据丢失说拜拜!可持久保持玩家最高分记录!</li>
+<li>加强模式:出现5连块</li>
+<li>障碍模式:开局黑色块</li>
+<li>实现分段提速&amp;理想的Alerter提示板</li>
+<li>实现操作2度提升,按住一直移动</li>
+<li>应对每个模式的不同storage(应该放在start里做,切换模式即显示)</li>
+</ol>
+</li>
+<li>
+<p>软装</p>
+<ol>
+<li>基础框架搭建(背景大小合适化;版面布局)</li>
+<li>现实footer注解,字号排版调整布局</li>
+<li>hsl色号平衡调整</li>
+<li>仿FRVR护眼配色</li>
+</ol>
+</li>
+<li>
+<p>待优化</p>
+<ol>
+<li>新mode</li>
+<li>玩家名称&amp;技能</li>
+<li>全版面像素风格化</li>
+</ol>
+</li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://zhydada.github.io/tags/game">game</a></span><span class="tag"><a href="https://zhydada.github.io/tags/work">work</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>646 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2022-08-02 21:53 &#43;0800</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://zhydada.github.io/posts/2048/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>2048</span>
+			</a>
+			<a class="prev-post" href="https://zhydada.github.io/posts/jumpin-ball-v1/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Jumpin Ball V1</span>
+			</a>
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2023 <a href="https://zhydada.github.io">zhyDaDa</a> &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://zhydada.github.io/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://zhydada.github.io/js/bundle.min.580988ed2982bcbb74a1773c7abea97b43e4c43b9324e10cda0813ec6ec4bb67.js" integrity="sha256-WAmI7SmCvLt0oXc8er6pe0PkxDuTJOEM2ggT7G7Eu2c=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

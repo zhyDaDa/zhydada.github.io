@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>game on zhyDaDa的个人站点</title>
+    <link>https://zhydada.github.io/tags/game/</link>
+    <description>Recent content in game on zhyDaDa的个人站点</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 02 Aug 2022 23:05:34 +0800</lastBuildDate><atom:link href="https://zhydada.github.io/tags/game/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>2048</title>
+      <link>https://zhydada.github.io/posts/2048/</link>
+      <pubDate>Tue, 02 Aug 2022 23:05:34 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/2048/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 手机端入口, 但目前只能玩经典模式, 触控按钮隐藏在图示的四个标红区域 操作提示: 按K键可以展示每个按键对</description>
+    </item>
+    
+    <item>
+      <title>Tetris</title>
+      <link>https://zhydada.github.io/posts/tetris/</link>
+      <pubDate>Tue, 02 Aug 2022 21:53:31 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/tetris/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 可能需要手动调整界面的缩放 简介 内容: 高中阶段制作的一款俄罗斯方块游戏, 稍加改编, 共有三种模式可供选择</description>
+    </item>
+    
+    <item>
+      <title>Jumpin Ball V1</title>
+      <link>https://zhydada.github.io/posts/jumpin-ball-v1/</link>
+      <pubDate>Mon, 01 Aug 2022 21:33:53 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/jumpin-ball-v1/</guid>
+      <description>游戏入口 务必使用电脑pc端, 点我开始游戏 简介 名称: 高中阶段制作的一款横版跳跃游戏, 游戏名来自jc同学, 中文名暂且称为&amp;quot;横版跳跃&amp;q</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C井学习笔记 on zhyDaDa的个人站点</title>
+    <link>https://zhydada.github.io/tags/c%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</link>
+    <description>Recent content in C井学习笔记 on zhyDaDa的个人站点</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 23 Aug 2022 08:27:54 +0800</lastBuildDate><atom:link href="https://zhydada.github.io/tags/c%E4%BA%95%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Day20_飞行棋___2022-08-23_08-27</title>
+      <link>https://zhydada.github.io/posts/day20_%E9%A3%9E%E8%A1%8C%E6%A3%8B___2022-08-23_08-27/</link>
+      <pubDate>Tue, 23 Aug 2022 08:27:54 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day20_%E9%A3%9E%E8%A1%8C%E6%A3%8B___2022-08-23_08-27/</guid>
+      <description>目录 游戏头 初始化地图 绘制地图 输入姓名 核心游戏机制 最后调整Main函数 总结 游戏头 作用: 输出游戏初始界面 Console.ForegroundColor = ConsoleColor.Cyan; Console.BackgroundColor = ConsoleColor.Black; Console.WriteLine(@&amp;#34; ******************************************** ******************************************** *******飞行棋游</description>
+    </item>
+    
+    <item>
+      <title>Day19_方法的三个练习</title>
+      <link>https://zhydada.github.io/posts/day19_%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%83%E4%B9%A0___2022-08-13_22-43/</link>
+      <pubDate>Sat, 13 Aug 2022 22:43:03 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day19_%E6%96%B9%E6%B3%95%E7%9A%84%E4%B8%89%E4%B8%AA%E7%BB%83%E4%B9%A0___2022-08-13_22-43/</guid>
+      <description>目录 练习1 练习2 练习3 练习1 题目: 一个string类型的数组, 要输出其中最长的字符串 参考字符串: &amp;ldquo;Bernoulli&amp;rdquo;,&amp;ldquo;Fatou&amp;rdquo;,&amp;ldquo;Euler&amp;rdquo;,&amp;ldquo;Gauss&amp;rdquo;,&amp;ldquo;Riemann&amp;rdquo;,&amp;ldquo;Neumann&amp;rdquo;,&amp;ldquo;Newton&amp;rdquo;,&amp;ldquo;Maxwell&amp;rdquo;,&amp;ldquo;Kepler&amp;rdquo;,&amp;ldquo;Leibniz&amp;rdquo;,&amp;ldquo;Lagrange&amp;rdquo; static void Main(string[] args) //Main函数 { //代码从这里走</description>
+    </item>
+    
+    <item>
+      <title>Day18_方法的重载和递归</title>
+      <link>https://zhydada.github.io/posts/day18_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%BD%BD%E5%92%8C%E9%80%92%E5%BD%92___2022-08-11_21-31/</link>
+      <pubDate>Thu, 11 Aug 2022 21:31:08 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day18_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%BD%BD%E5%92%8C%E9%80%92%E5%BD%92___2022-08-11_21-31/</guid>
+      <description>目录 方法的重载 方法的递归 方法的重载 概念: 方法的重载是指, 方法名称相同, 但参数不同(应对不同参数采用不同方法) 举例: WriteLine这个方法</description>
+    </item>
+    
+    <item>
+      <title>DayDay17_out参数_ref参数_params可变参数___2022-08-09_20-27</title>
+      <link>https://zhydada.github.io/posts/day17_out%E5%8F%82%E6%95%B0_ref%E5%8F%82%E6%95%B0_params%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0___2022-08-09_20-27/</link>
+      <pubDate>Tue, 09 Aug 2022 20:27:04 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day17_out%E5%8F%82%E6%95%B0_ref%E5%8F%82%E6%95%B0_params%E5%8F%AF%E5%8F%98%E5%8F%82%E6%95%B0___2022-08-09_20-27/</guid>
+      <description>目录 引入练习 out参数 out练习 ref参数 params可变参数 引入练习 求数组的最大值, 最小值, 总和, 平均值 由于返回多个同类型的值, 所以返回数</description>
+    </item>
+    
+    <item>
+      <title>DayDay16_掌握方法的使用</title>
+      <link>https://zhydada.github.io/posts/day16_%E6%8E%8C%E6%8F%A1%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8___2022-08-07_20-30/</link>
+      <pubDate>Sun, 07 Aug 2022 20:30:41 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day16_%E6%8E%8C%E6%8F%A1%E6%96%B9%E6%B3%95%E7%9A%84%E4%BD%BF%E7%94%A8___2022-08-07_20-30/</guid>
+      <description>目录 复习 方法的调用问题 练习1 方法的概念 练习2 两个练习 复习 常量: 赋予初始值后, 不可以重新赋值 const int number = 10; 枚举: 可以和int兼容, 和string转</description>
+    </item>
+    
+    <item>
+      <title>Day15_方法</title>
+      <link>https://zhydada.github.io/posts/day15_%E6%96%B9%E6%B3%95___2022-08-06_23-17/</link>
+      <pubDate>Sat, 06 Aug 2022 23:17:16 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day15_%E6%96%B9%E6%B3%95___2022-08-06_23-17/</guid>
+      <description>方法 细节问题 (课程第五天)总结 方法 定义: 方法(函数)就是将一堆代码重用的机制 语法: [public] static 返回值类型 方法名 ([参数列表]) { 方法体; } 说明 public: 访问</description>
+    </item>
+    
+    <item>
+      <title>Day14_数组的操作</title>
+      <link>https://zhydada.github.io/posts/day14_%E6%95%B0%E7%BB%84%E7%9A%84%E6%93%8D%E4%BD%9C___2022-08-05_22-55/</link>
+      <pubDate>Fri, 05 Aug 2022 22:55:44 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day14_%E6%95%B0%E7%BB%84%E7%9A%84%E6%93%8D%E4%BD%9C___2022-08-05_22-55/</guid>
+      <description>计算数组的最大值/最小值/总和/平均值 翻转数组 冒泡排序 计算数组的最大值/最小值/总和/平均值 随机长度, 随机值组成的整数数组 int[] nums = { 1, 2, 3, 4, 5,</description>
+    </item>
+    
+    <item>
+      <title>Day_13_数组</title>
+      <link>https://zhydada.github.io/posts/day13_%E6%95%B0%E7%BB%84___2022-08-04_23-11/</link>
+      <pubDate>Thu, 04 Aug 2022 23:11:18 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day13_%E6%95%B0%E7%BB%84___2022-08-04_23-11/</guid>
+      <description>数组的定义 数组的定义 一次性存储多个相同类型的变量 语法 //法1 数组类型[] 数组名 = new 数组类型[数组长度] int[] nums1 = new int[10]; //法2 int[] nums2 = {1,2,3}; //法3 int[] nums3</description>
+    </item>
+    
+    <item>
+      <title>Day12_复杂数据类型_常量_枚举_结构</title>
+      <link>https://zhydada.github.io/posts/day12_%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B_%E5%B8%B8%E9%87%8F_%E6%9E%9A%E4%B8%BE_%E7%BB%93%E6%9E%84___2022-08-03_21-48/</link>
+      <pubDate>Wed, 03 Aug 2022 21:48:48 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day12_%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B_%E5%B8%B8%E9%87%8F_%E6%9E%9A%E4%B8%BE_%E7%BB%93%E6%9E%84___2022-08-03_21-48/</guid>
+      <description>主要内容 小复习 常量 枚举 结构 小复习 常见变量类型 int/double/string/char/bool/decimal 变量使用规则: 声明$\rightarrow$赋值$\rightarrow$使用 命名规则 Camel 和 Pascal 运</description>
+    </item>
+    
+    <item>
+      <title>Day11_类型转换和方法简介_更多的习题_三元表达式</title>
+      <link>https://zhydada.github.io/posts/day11_%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%92%8C%E6%96%B9%E6%B3%95%E7%AE%80%E4%BB%8B_%E6%9B%B4%E5%A4%9A%E7%9A%84%E4%B9%A0%E9%A2%98_%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F___2022-07-30_21-36/</link>
+      <pubDate>Sat, 30 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day11_%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%92%8C%E6%96%B9%E6%B3%95%E7%AE%80%E4%BB%8B_%E6%9B%B4%E5%A4%9A%E7%9A%84%E4%B9%A0%E9%A2%98_%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F___2022-07-30_21-36/</guid>
+      <description>主要内容 类型转换 循环的习题 随机数 类型转换 使用Convert.Int32(&amp;quot;string&amp;quot;), 失败了会抛异常 使用int.P</description>
+    </item>
+    
+    <item>
+      <title>Day10_continue和for</title>
+      <link>https://zhydada.github.io/posts/day10_continue%E5%92%8Cfor___2022-07-26_22-48/</link>
+      <pubDate>Tue, 26 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day10_continue%E5%92%8Cfor___2022-07-26_22-48/</guid>
+      <description>主要内容 关键字 Continue for 循环(和嵌套) 程序调试 关键字 Continue 作用: 立刻结束本次循环 判断循环的条件 成立继续, 不成立退出 注意: 凡是continue后面的代码</description>
+    </item>
+    
+    <item>
+      <title>Day09_while和break</title>
+      <link>https://zhydada.github.io/posts/day09_while%E5%92%8Cbreak___2022-07-24_21-10/</link>
+      <pubDate>Sun, 24 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day09_while%E5%92%8Cbreak___2022-07-24_21-10/</guid>
+      <description>主要内容 循环结构 while 关键字 break 练习*3 do-while 结构 循环结构 while while循环: while(循环条件) { 循环体 } 执行过程: 循环运行到while处 首先判断循</description>
+    </item>
+    
+    <item>
+      <title>Day08_异常捕获_switch-case结构</title>
+      <link>https://zhydada.github.io/posts/day08_%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7_switch-case%E7%BB%93%E6%9E%84___2022-07-23_22-42/</link>
+      <pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day08_%E5%BC%82%E5%B8%B8%E6%8D%95%E8%8E%B7_switch-case%E7%BB%93%E6%9E%84___2022-07-23_22-42/</guid>
+      <description>主要内容 异常捕获 异常捕获 异常: 语法上没有错误, 在程序运行过程中, 由于某些原因程序出了问题, 不能再正常运行 出现异常很正常, 当我们知道程序中有可</description>
+    </item>
+    
+    <item>
+      <title>Day07_if结构</title>
+      <link>https://zhydada.github.io/posts/day07_if%E7%BB%93%E6%9E%84___2022-07-22_16-35/</link>
+      <pubDate>Fri, 22 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day07_if%E7%BB%93%E6%9E%84___2022-07-22_16-35/</guid>
+      <description>主要内容 判断闰年小练习 基本程序结构前瞻 if / else / else if 四个分支结构练习 判断闰年小练习 Console.WriteLine(&amp;#34;请输入要判断的</description>
+    </item>
+    
+    <item>
+      <title>Day06_Convert类型转换_加加减减_关系运算与逻辑判断</title>
+      <link>https://zhydada.github.io/posts/day06_convert%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2_%E5%8A%A0%E5%8A%A0%E5%87%8F%E5%87%8F_%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E4%B8%8E%E9%80%BB%E8%BE%91%E5%88%A4%E6%96%AD___2022-07-21_15-50/</link>
+      <pubDate>Thu, 21 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day06_convert%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2_%E5%8A%A0%E5%8A%A0%E5%87%8F%E5%87%8F_%E5%85%B3%E7%B3%BB%E8%BF%90%E7%AE%97%E4%B8%8E%E9%80%BB%E8%BE%91%E5%88%A4%E6%96%AD___2022-07-21_15-50/</guid>
+      <description>主要内容 Convert类型转换 加加减减 运算顺序 复合赋值运算符 关系运算符 逻辑运算符 Convert类型转换 Convert转换工厂可以使得不兼容的</description>
+    </item>
+    
+    <item>
+      <title>Day05_接受用户输入_基础符号_类型转换</title>
+      <link>https://zhydada.github.io/posts/day05_%E6%8E%A5%E5%8F%97%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5_%E5%9F%BA%E7%A1%80%E7%AC%A6%E5%8F%B7_%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2___2022-07-20_13-07/</link>
+      <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day05_%E6%8E%A5%E5%8F%97%E7%94%A8%E6%88%B7%E8%BE%93%E5%85%A5_%E5%9F%BA%E7%A1%80%E7%AC%A6%E5%8F%B7_%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2___2022-07-20_13-07/</guid>
+      <description>主要内容 接受用户输入 转义符 算数运算符 类型转换 接受用户输入 新函数: string str = Console.ReadLine(); 注意: string 可以存储所有的类型, 且要求必须用string来接受 转义符 转义</description>
+    </item>
+    
+    <item>
+      <title>Day04_运算符and变量操作</title>
+      <link>https://zhydada.github.io/posts/day04_%E8%BF%90%E7%AE%97%E7%AC%A6and%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C___2022-07-19_11-41/</link>
+      <pubDate>Tue, 19 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day04_%E8%BF%90%E7%AE%97%E7%AC%A6and%E5%8F%98%E9%87%8F%E6%93%8D%E4%BD%9C___2022-07-19_11-41/</guid>
+      <description>主要内容 赋值运算符 加号的使用 占位符 交换两个变量 赋值运算符 &amp;ldquo;=&amp;rdquo; 表示赋值运算符, 负责将右边的值赋值给左边的变量 由&amp;quot;=&amp;ldquo;连接的</description>
+    </item>
+    
+    <item>
+      <title>Day03_基础语法之注释和变量</title>
+      <link>https://zhydada.github.io/posts/day03_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B9%8B%E6%B3%A8%E9%87%8A%E5%92%8C%E5%8F%98%E9%87%8F___2022-07-17_22-30/</link>
+      <pubDate>Sun, 17 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day03_%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%E4%B9%8B%E6%B3%A8%E9%87%8A%E5%92%8C%E5%8F%98%E9%87%8F___2022-07-17_22-30/</guid>
+      <description>主要内容 写注释 快捷键 变量 变量使用规则 变量起名规矩 写注释 不写注释是流氓 名字瞎起是扯淡 注释的功能 既可以解释代码 也可以注销代码 注释的形式 单行: //xxx 多</description>
+    </item>
+    
+    <item>
+      <title>Day02_开始使用VisualStudio代码走起</title>
+      <link>https://zhydada.github.io/posts/day02_%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8visualstudio%E4%BB%A3%E7%A0%81%E8%B5%B0%E8%B5%B7___2022-07-15_09-52/</link>
+      <pubDate>Fri, 15 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day02_%E5%BC%80%E5%A7%8B%E4%BD%BF%E7%94%A8visualstudio%E4%BB%A3%E7%A0%81%E8%B5%B0%E8%B5%B7___2022-07-15_09-52/</guid>
+      <description>主要内容 安装了vs 熟悉VisualStudio 两行代码 熟悉VisualStudio 解决方案包含多个项目, 项目又包含多个类文件 项目中最要紧的是</description>
+    </item>
+    
+    <item>
+      <title>Day01_了解C井以及.Net的功能</title>
+      <link>https://zhydada.github.io/posts/day01_%E4%BA%86%E8%A7%A3c%E4%BA%95%E4%BB%A5%E5%8F%8A.net%E7%9A%84%E5%8A%9F%E8%83%BD___2022-07-14_11-01/</link>
+      <pubDate>Thu, 14 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day01_%E4%BA%86%E8%A7%A3c%E4%BA%95%E4%BB%A5%E5%8F%8A.net%E7%9A%84%E5%8A%9F%E8%83%BD___2022-07-14_11-01/</guid>
+      <description>p.s. 标题写C井是由于#符号在Url出现会粗问题, 偷懒就先这样将就着了 主要内容 C#编程语言 .Net能做什么 .Net两种交互模式 C#编程语言 C# 是基</description>
+    </item>
+    
+    <item>
+      <title>Day00_学习准备与前瞻</title>
+      <link>https://zhydada.github.io/posts/day00_%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87%E4%B8%8E%E5%89%8D%E7%9E%BB___2022-07-13_23-32/</link>
+      <pubDate>Wed, 13 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/day00_%E5%AD%A6%E4%B9%A0%E5%87%86%E5%A4%87%E4%B8%8E%E5%89%8D%E7%9E%BB___2022-07-13_23-32/</guid>
+      <description>主要内容 学习计划 各语言对比 什么是.Net 学习计划 js仍然要继续使用巩固 首先掌握C# 【01_C#入门到精通】新手强烈推荐：C#开发课程，一整套</description>
+    </item>
+    
+  </channel>
+</rss>

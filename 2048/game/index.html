@@ -1,0 +1,1875 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <title id="mainTitle"></title>
+   <meta charset="utf-8" />
+
+   <!--TODO:
+   更新说明:
+   这一版带解密
+
+   V1--隐藏式触控按钮(在V4被遮挡)
+   V2--高分榜
+   V3--新增两个游戏模式
+     --暗黑竞速模式
+     --火红双倍模式
+     --X方块挑战模式
+   V4--加入动画制作
+     --背景方块泡泡
+     --开头展示动画
+   V5--实现从外部读取设置
+   V6--竞速模式限制按键频率
+
+   改进方向:
+   1.其他模式(方块1&&方块X) $$   √
+   2.盲盒block(随机数,相加时才知道,用遮罩)$$$$
+   3.撤销上一步$$
+   4.5*5模式$$$
+   5.永久数据记录$$$$$
+
+-->
+
+   <style>
+      @charset "utf-8";
+
+      #gridPanel {
+         width: 480px;
+         height: 480px;
+         margin: 0 auto;
+         background-color: #bbada0;
+         border-radius: 10px;
+         position: relative;
+      }
+
+      .grid,
+      .cell {
+         width: 100px;
+         height: 100px;
+         border-radius: 6px;
+      }
+
+      .grid {
+         background-color: #ccb8b3;
+         margin: 16px 0 0 16px;
+         float: left;
+      }
+
+      .cell {
+         /*margin:16px 0 0 16px;
+ float:left;
+ position:relative;
+ z-index:10;
+ top:-464px;
+ left:0;*/
+         position: absolute;
+         text-align: center;
+         line-height: 100px;
+         font-size: 60px;
+      }
+
+      #c00,
+      #c01,
+      #c02,
+      #c03 {
+         top: 16px;
+      }
+
+      #c10,
+      #c11,
+      #c12,
+      #c13 {
+         top: 132px;
+      }
+
+      #c20,
+      #c21,
+      #c22,
+      #c23 {
+         top: 248px;
+      }
+
+      #c30,
+      #c31,
+      #c32,
+      #c33 {
+         top: 364px;
+      }
+
+      #c00,
+      #c10,
+      #c20,
+      #c30 {
+         left: 16px;
+      }
+
+      #c01,
+      #c11,
+      #c21,
+      #c31 {
+         left: 132px;
+      }
+
+      #c02,
+      #c12,
+      #c22,
+      #c32 {
+         left: 248px;
+      }
+
+      #c03,
+      #c13,
+      #c23,
+      #c33 {
+         left: 364px;
+      }
+
+      .n1 {
+         background-color: rgb(0, 183, 255);
+      }
+
+      .n2 {
+         background-color: #eee3da
+      }
+
+      .n4 {
+         background-color: #ede0c8
+      }
+
+      .n8 {
+         background-color: #f2b179
+      }
+
+      .n16 {
+         background-color: #f59563
+      }
+
+      .n32 {
+         background-color: #f67c5f
+      }
+
+      .n64 {
+         background-color: #f65e3b
+      }
+
+      .n128 {
+         background-color: #edcf72
+      }
+
+      .n256 {
+         background-color: #edcc61
+      }
+
+      .n512 {
+         background-color: #9c0
+      }
+
+      .n1024 {
+         background-color: #33b5e5
+      }
+
+      .n2048 {
+         background-color: #09c
+      }
+
+      .n4096 {
+         background-color: #a6c
+      }
+
+      .n8192 {
+         background-color: #93c
+      }
+
+      .n8,
+      .n16,
+      .n32,
+      .n64,
+      .n128,
+      .n256,
+      .n512,
+      .n1024,
+      .n2048,
+      .n4096,
+      .n8192 {
+         color: #fff
+      }
+
+      .n1024,
+      .n2048,
+      .n4096,
+      .n8192 {
+         font-size: 40px
+      }
+
+      .X {
+         color: #eee3da;
+         background-color: #002B36;
+      }
+
+      .word {
+         color: ghostwhite;
+         background-color: #000000bb;
+      }
+
+      /*分数显示*/
+      p {
+         width: 480px;
+         margin: 0 auto;
+         font-family: Arial;
+         font-weight: bold;
+         font-size: 40px;
+         padding-top: 15px;
+      }
+
+      /*Game Over*/
+      #gameOver {
+         width: 100%;
+         height: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         display: none;
+      }
+
+      #gameOver>div {
+         width: 100%;
+         height: 100%;
+         background-color: #555;
+         opacity: .5;
+      }
+
+      #gameOver>p {
+         width: 300px;
+         height: 200px;
+         border: 1px solid #edcf72;
+         line-height: 1.6em;
+         text-align: center;
+         background-color: #fff;
+         border-radius: 10px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         margin-top: -135px;
+         margin-left: -150px;
+      }
+
+      .button {
+         padding: 10px;
+         border-radius: 6px;
+         background-color: #9f8b77;
+         color: #fff;
+         cursor: pointer;
+      }
+
+      /*
+*V1
+*隐藏式触控按钮
+*/
+      .handler {
+         background-color: rgba(0, 191, 255, 0);
+         cursor: pointer;
+         border-radius: 6px;
+         position: absolute;
+      }
+
+      #left_h {
+         left: 16px;
+         top: 132px;
+         height: 216px;
+         width: 100px;
+      }
+
+      #right_h {
+         left: 364px;
+         top: 132px;
+         height: 216px;
+         width: 100px;
+      }
+
+      #up_h {
+         left: 132px;
+         top: 16px;
+         height: 100px;
+         width: 216px;
+      }
+
+      #down_h {
+         left: 132px;
+         top: 364px;
+         height: 100px;
+         width: 216px;
+      }
+
+      /* *V2 *高分榜 */
+      #highScores {
+         width: 360px;
+         margin-left: 0px;
+         position: fixed;
+         left: 0px;
+         text-align: left;
+         font-size: 40px;
+         color: white;
+         background-color: #bbada0;
+         display: block;
+         border-radius: 10px;
+         padding: 15px;
+      }
+
+      /*按键信息*/
+      #keyInfo {
+         width: 100%;
+         height: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         display: none;
+      }
+
+      #keyInfo>div {
+         width: 100%;
+         height: 100%;
+         background-color: #555;
+         opacity: .5;
+      }
+
+      #keyInfo>p {
+         width: 800px;
+         height: 600px;
+         border: 1px solid #edcf72;
+         line-height: 1.6em;
+         text-align: center;
+         background-color: #002B36;
+         color: #93A1A1;
+         border-radius: 10px;
+         position: absolute;
+         top: 50%;
+         left: 50%;
+         margin-top: -365px;
+         margin-left: -400px;
+      }
+
+      /* 计时器：分、秒、毫秒 */
+      #time {
+         text-align: center;
+         font-size: 4.5em;
+         color: #02C4F2;
+         float: right;
+         display: none;
+         background-color: rgb(240, 255, 255, 0.15);
+         width: 500px;
+         position: absolute;
+         right: 0px;
+         margin-top: 15%;
+         border-radius: 10px;
+      }
+
+
+      /*V4背景泡泡*/
+      .bg-bubbles {
+         position: fixed;
+         left: 0;
+         width: 100%;
+      }
+
+      .bg-bubbles {
+         bottom: 150px;
+         z-index: 1
+      }
+
+      .bg-bubbles li {
+         text-align: center;
+         position: absolute;
+         border-radius: 10px;
+         list-style: none;
+         display: block;
+         width: 40px;
+         height: 40px;
+         background-color: hsla(0, 0%, 100%, .15);
+         bottom: -160px;
+         animation: square 35s infinite;
+         transition-timing-function: linear;
+         animation-delay: -20s
+      }
+
+      .bg-bubbles li:nth-child(1) {
+         left: 10%;
+         animation-duration: 39s
+      }
+
+      .bg-bubbles li:nth-child(2) {
+         left: 20%;
+         width: 80px;
+         height: 80px;
+         animation-delay: 2s;
+         animation-duration: 17s
+      }
+
+      .bg-bubbles li:nth-child(3) {
+         left: 69%;
+         animation-delay: -4s;
+         animation-duration: 29s
+      }
+
+      .bg-bubbles li:nth-child(4) {
+         left: 466%;
+         width: 60px;
+         height: 60px;
+         animation-duration: 13s;
+         background-color: hsla(0, 0%, 100%, .25)
+      }
+
+      .bg-bubbles li:nth-child(5) {
+         left: 70%;
+         animation-duration: 32s
+      }
+
+      .bg-bubbles li:nth-child(6) {
+         left: 80%;
+         width: 120px;
+         height: 120px;
+         animation-delay: -3s;
+         background-color: hsla(0, 0%, 100%, .2)
+      }
+
+      .bg-bubbles li:nth-child(7) {
+         left: 32%;
+         width: 110px;
+         height: 110px;
+         animation-delay: -7s
+      }
+
+      .bg-bubbles li:nth-child(8) {
+         left: 55%;
+         width: 20px;
+         height: 20px;
+         animation-delay: 5s;
+         animation-duration: 33s
+      }
+
+      .bg-bubbles li:nth-child(9) {
+         left: 25%;
+         width: 10px;
+         height: 10px;
+         animation-delay: 2s;
+         animation-duration: 23s;
+         background-color: hsla(0, 0%, 100%, .3)
+      }
+
+      .bg-bubbles li:nth-child(10) {
+         left: 85%;
+         width: 20px;
+         height: 20px;
+         animation-delay: -6s
+      }
+
+      .bg-bubbles li:nth-child(11) {
+         left: 18%
+      }
+
+      .bg-bubbles li:nth-child(12) {
+         left: 60%;
+         width: 80px;
+         height: 80px;
+         animation-delay: 2s;
+         animation-duration: 47s
+      }
+
+      .bg-bubbles li:nth-child(13) {
+         left: 25%;
+         animation-delay: -4s
+      }
+
+      .bg-bubbles li:nth-child(14) {
+         left: 76%;
+         width: 60px;
+         height: 60px;
+         animation-duration: 13s;
+         background-color: hsla(0, 0%, 100%, .25)
+      }
+
+      .bg-bubbles li:nth-child(15) {
+         left: 82%;
+         animation-duration: 29s
+      }
+
+      .bg-bubbles li:nth-child(16) {
+         left: 41%;
+         width: 120px;
+         height: 120px;
+         animation-delay: -13s;
+         background-color: hsla(0, 0%, 100%, .2)
+      }
+
+      .bg-bubbles li:nth-child(17) {
+         left: 12%;
+         width: 160px;
+         height: 160px;
+         animation-delay: -2s;
+         animation-duration: 16s
+      }
+
+      .bg-bubbles li:nth-child(18) {
+         left: 35%;
+         width: 70px;
+         height: 70px;
+         animation-delay: 5s;
+         animation-duration: 20.5s
+      }
+
+      .bg-bubbles li:nth-child(19) {
+         left: 8%;
+         width: 10px;
+         height: 10px;
+         animation-delay: 2s;
+         animation-duration: 14s;
+         background-color: hsla(0, 0%, 100%, .3)
+      }
+
+      .bg-bubbles li:nth-child(20) {
+         left: 45%;
+         width: 160px;
+         height: 160px;
+         animation-delay: -6s;
+         animation-duration: 24s
+      }
+
+      @keyframes square {
+         0% {
+            transform: translatey(0)
+         }
+
+         to {
+            transform: translatey(-850px) rotate(600deg)
+         }
+      }
+
+      /*V4开头动画*/
+      #title {
+         width: 100%;
+         height: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         display: block;
+         align-items: center;
+         justify-content: space-around;
+         overflow: hidden;
+      }
+
+      #whiteBoard {
+         width: 100%;
+         height: 100%;
+         position: absolute;
+         top: 0;
+         left: 0;
+         display: block;
+         background-color: #fff;
+         animation: zoomOut2 0.5s 2.5s forwards
+      }
+
+      .container {
+         min-height: 100vh;
+         display: flex;
+         flex-direction: column;
+         text-align: center;
+         overflow: hidden;
+         animation: zoomOut1 1s 2s forwards;
+      }
+
+      .title {
+         color: #35495e;
+         width: 100%;
+         top: 16vh;
+         font-weight: 100;
+         font-size: 8vh;
+         letter-spacing: 1px;
+         position: relative;
+      }
+
+      .zoomIn {
+         animation: 1.2s forwards;
+         animation-name: zoomIn
+      }
+
+      @keyframes zoomIn {
+         0% {
+            -webkit-transform: scale(4);
+            transform: scale(4);
+            opacity: 0
+         }
+      }
+
+      @keyframes zoomOut1 {
+         90% {
+            transform: scale(2);
+            opacity: 0;
+         }
+
+         100% {
+            transform: scale(0);
+            opacity: 0;
+         }
+
+      }
+
+      @keyframes zoomOut2 {
+         90% {
+            transform: scale(1);
+            opacity: 0;
+         }
+
+         100% {
+            transform: scale(0);
+            opacity: 0;
+         }
+      }
+
+      @keyframes dzz {
+         0% {
+            top: -80px;
+         }
+
+         20% {
+            top: 20px;
+         }
+
+         80% {
+            top: 20px;
+         }
+
+         100% {
+            top: -80px;
+         }
+      }
+
+      #dzz {
+         position: fixed;
+         display: block;
+         font-size: 26px;
+         line-height: 2.2em;
+         right: 20px;
+         top: -80px;
+         width: 300px;
+         height: 60px;
+         background-color: darkviolet;
+         color: ghostwhite;
+         text-align: center;
+         border: grey 4px solid;
+         border-radius: 6px;
+         animation: dzz 5s forwards;
+         transition-timing-function: linear;
+         animation-delay: 4s;
+
+      }
+   </style>
+</head>
+
+
+<!--------------------------------------------------->
+
+<body id="body">
+
+
+   <div id="highScores">
+      高分榜：
+      <span id="scoresDisplay"></span>
+   </div>
+
+   <!--V3 super模式 计时器 -->
+   <div id="time">
+      <span id="id_M">00</span>:
+      <span id="id_S">00</span>:
+      <span id="id_MS">000</span>
+   </div>
+   <!--V4 背景泡泡-->
+   <ul class="bg-bubbles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li id="li2"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li id="li1"></li>
+      <li></li>
+      <li></li>
+      <li id="li"></li>
+   </ul>
+
+
+
+   <p id="scoreDisplay">Score:<span id="score"></span></p>
+   <div id="gridPanel">
+      <!--背景格-->
+      <!--第1行-->
+      <div id="g00" class="grid"></div>
+      <div id="g01" class="grid"></div>
+      <div id="g02" class="grid"></div>
+      <div id="g03" class="grid"></div>
+      <!--第2行-->
+      <div id="g10" class="grid"></div>
+      <div id="g11" class="grid"></div>
+      <div id="g12" class="grid"></div>
+      <div id="g13" class="grid"></div>
+      <!--第3行-->
+      <div id="g20" class="grid"></div>
+      <div id="g21" class="grid"></div>
+      <div id="g22" class="grid"></div>
+      <div id="g23" class="grid"></div>
+      <!--第4行-->
+      <div id="g30" class="grid"></div>
+      <div id="g31" class="grid"></div>
+      <div id="g32" class="grid"></div>
+      <div id="g33" class="grid"></div>
+      <!--前景格-->
+      <!--第1行-->
+      <div id="c00" class="cell"></div>
+      <div id="c01" class="cell"></div>
+      <div id="c02" class="cell"></div>
+      <div id="c03" class="cell"></div>
+      <!--第2行-->
+      <div id="c10" class="cell"></div>
+      <div id="c11" class="cell"></div>
+      <div id="c12" class="cell"></div>
+      <div id="c13" class="cell"></div>
+      <!--第3行-->
+      <div id="c20" class="cell"></div>
+      <div id="c21" class="cell"></div>
+      <div id="c22" class="cell"></div>
+      <div id="c23" class="cell"></div>
+      <!--第4行-->
+      <div id="c30" class="cell"></div>
+      <div id="c31" class="cell"></div>
+      <div id="c32" class="cell"></div>
+      <div id="c33" class="cell"></div>
+      <!--Handler-->
+      <div id="handler">
+         <div class="handler" id="left_h" onclick="handler.left()"></div>
+         <div class="handler" id="right_h" onclick="handler.right()"></div>
+         <div class="handler" id="up_h" onclick="handler.up()"></div>
+         <div class="handler" id="down_h" onclick="handler.down()"></div>
+      </div>
+   </div>
+
+
+
+
+   <div id="gameOver">
+      <!--同时包含前景和背景的容器-->
+      <div>
+         <!--半透明灰色背景-->
+      </div>
+      <p>
+         <!--居中小窗口-->
+         Game Over!<br>
+         Score:<span id="finalScore"></span><br>
+         <a class="button" onclick="game.start()">按空格重启</a>
+      </p>
+   </div>
+
+   <div id="keyInfo">
+      <!--同时包含前景和背景的容器-->
+      <div>
+         <!--半透明灰色背景-->
+      </div>
+      <p>
+         <!--居中小窗口-->
+         K==>展示按键信息<br>
+         O==>直接输(测试用)<br>
+         R==>逆时针转90°<br>
+         空格键==>重新开始<br>
+         1==>暗黑竞速模式<br>
+         2==>火红双倍模式<br>
+         3==>X方块挑战模式<br>
+         4==>万宁模式?<br>
+         5==>混沌模式<br>
+      </p>
+      <h6>版本信息:6.6.3</h6>
+   </div>
+
+
+   <div id="title">
+      <div id="whiteBoard"></div>
+      <div class="container">
+         <div class="title zoomIn">
+            <h2>2048</h2>
+            <h4>by zhyDaDa</h4>
+         </div>
+      </div>
+   </div>
+
+   <div id="dzzAlert">
+   </div>
+
+</body>
+
+<!--------------------------------------------------->
+<script>
+   /*
+    *请务必把介个和html文件一起放在2048的文件夹中
+    *否则...玩不了呗
+    *不要自行改变变量名
+    *数字随意
+    *每一条后面都会说明变量意义
+    *Enjoy it~
+    */
+
+   var settings = { //这是个壳子,别动就行
+
+      mode: 0, //初始模式
+      /*
+       *0--经典
+       *1--竞速
+       *2--双倍
+       *3--挑战
+       *4--万宁
+       */
+      score: 0, //初始分数
+      initialNum: 2, //初始方块数
+      time: 20 * 1000, //j竞速模式的时间,单位为毫秒
+      times: 73, //毫秒位置的闪动周期,单位毫秒(越小越快)
+      mode1Key: 49, //1
+      mode2Key: 50, //2
+      mode3Key: 51, //3
+      mode4Key: 52, //4
+      mode5Key: 53, //5
+      upKey: [87, 38], //w
+      downKey: [83, 40], //s
+      leftKey: [65, 37], //a
+      rightKey: [68, 39], //d
+
+      highScoresFontSize: 45 + "px",
+      xRandomRate: 0.05, //x方块出现概率
+
+      tps: 5, //taps per second 每tpsLimitInterval毫秒的按键次数
+      tpsLimitSetting: false, //限制开关
+      tpsLimitInterval: 5000, //每5秒
+
+   }
+
+
+
+
+
+
+   /*
+   var userSetKey1 = 49;//键盘"1"键
+   var userSetKey2 = 50;//键盘"2"键
+   var userSetKey3 = 51;//键盘"3"键
+
+   function userSetFunction1(){
+   //这里是按下"1"键后产生的效果
+   alert("你按下了'1'");
+   }
+   function userSetFunction2(){
+   //这里是按下"2"键后产生的效果
+   }
+   function userSetFunction3(){
+   //这里是按下"3"键后产生的效果
+   }
+   */
+</script>
+<script>
+   document.getElementById("highScores").style.fontSize = settings.highScoresFontSize;
+
+   var times = 0;
+
+   var oldStr;
+   var copy;
+   var game = {
+      data: [], //保存所有数字的二维数组
+      rn: 4, //总行数
+      cn: 4, //总列数
+      state: 0, //游戏当前状态：Running|GameOver
+      RUNNING: 1,
+      GAMEOVER: 0,
+      score: settings.score, //分数
+      mode: settings.mode, //模式
+      /*
+       *mode 0 = 经典模式
+       *mode 1 = 暗黑竞速模式
+       *mode 2 = 火红双倍模式
+       *mode 3 = X方块挑战模式 
+       *mode 4 = 万宁模式 
+       *mode 5 = 混沌模式 
+       */
+      isGameOver: function () { //判断游戏状态为结束
+         //如果没有满,则返回false
+         if (!this.isFull()) {
+            return false;
+         } else { //否则
+            //从左上角第一个元素开始，遍历二维数组
+            for (var row = 0; row < this.rn; row++) {
+               for (var col = 0; col < this.cn; col++) {
+                  //如果当前元素不是最右侧元素
+                  if (col < this.cn - 1) {
+                     // 如果当前元素==右侧元素
+                     if (this.data[row][col] ==
+                        this.data[row][col + 1]) {
+                        return false;
+                     }
+                  }
+                  //如果当前元素不是最下方元素
+                  if (row < this.rn - 1) {
+                     // 如果当前元素==下方元素
+                     if (this.data[row][col] ==
+                        this.data[row + 1][col]) {
+                        return false;
+                     }
+                  }
+               }
+            }
+            return true;
+         }
+      },
+      //TAG游戏开始
+      start: function () { //游戏开始
+         this.state = this.RUNNING;
+         //找到游戏结束界面，隐藏
+         var div = document.getElementById("gameOver");
+         div.style.display = "none";
+         this.data = [ //初始化二维数组
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+         ];
+         this.score = settings.score; //重置分数为0
+         /*for(var r=0;r<this.rn;r++){
+          this.data[r]=[];//向空数组中添加每一行数组
+          for(var c=0;c<this.cn;c++){
+           //向当前空行数组中加默认元素0
+           this.data[r][c]=0;
+          }
+         }*/
+
+         /*   V3游戏模式     */
+         var body = document.getElementById("body");
+         var gridPanel = document.getElementById("gridPanel");
+         var scoreDisplay = document.getElementById("scoreDisplay")
+         switch (this.mode) {
+            case 0:
+               body.style.backgroundColor = "#E7D3C0";
+               gridPanel.style.backgroundColor = "#bbada0";
+               scoreDisplay.style.color = "#000";
+               break;
+            case 1:
+               body.style.backgroundColor = "#000";
+               gridPanel.style.backgroundColor = "#bbada066";
+               scoreDisplay.style.color = "#fff";
+
+               break;
+            case 2:
+               body.style.backgroundColor = "#ee6644";
+               gridPanel.style.backgroundColor = "#bbada099 ";
+               scoreDisplay.style.color = "#fff";
+               break;
+            case 3:
+               body.style.backgroundColor = "#479DC4";
+               gridPanel.style.backgroundColor = "#bbada099 ";
+               scoreDisplay.style.color = "#fff";
+               break;
+            case 4:
+               body.style.backgroundColor = "#FFFFC0";
+               gridPanel.style.backgroundColor = "#bbada099 ";
+               scoreDisplay.style.color = "#000";
+               break;
+            case 5:
+               body.style.backgroundColor = "#7A29E7";
+               gridPanel.style.backgroundColor = "#bbada099 ";
+               scoreDisplay.style.color = "#fff";
+               break;
+
+            default:
+               break;
+         }
+         //生成初始方块
+         if (this.mode == 3) {
+            this.certainNum(-64);
+         }
+         if (this.mode == 2) {
+            this.randomNum();
+            this.randomNum();
+            this.randomNum();
+            this.randomNum();
+         }
+         for (var i = 0; i < settings.initialNum; i++) {
+            this.randomNum();
+         }
+         //将数据更新到页面
+
+         this.updateView();
+      },
+      /*TAG
+      每一步
+      */
+      nextStep: function (str) {
+         var oldStr = str;
+         var newStr = this.data.toString();
+         if (oldStr != newStr) {
+            //调用randomNum()，随机生成一个数
+
+            if (this.mode == 2) {
+               this.randomNum();
+               this.randomNum();
+            } else if (this.mode == 3 && Math.random() < settings.xRandomRate) {
+               this.certainNum(-64)
+            } else if (this.mode == 5) {
+               if (puzzleFlag5) {} else {
+                  function nnn() {
+                     var ranNNN = Math.random();
+                     if (ranNNN < 0.05) {
+                        return -64
+                     } else if (0.1 < ranNNN && ranNNN < 0.3) {
+                        return 8
+                     } else if (0.3 < ranNNN && ranNNN < 0.5) {
+                        return 0
+                     } else if (0.5 < ranNNN && ranNNN < 0.6) {
+                        return 16
+                     } else if (0.6 < ranNNN && ranNNN < 0.65) {
+                        return 64
+                     } else if (0.65 < ranNNN && ranNNN < 0.7) {
+                        return 1
+                     } else if (0.7 < ranNNN && ranNNN < 0.85) {
+                        return 4
+                     } else {
+                        return 2
+                     }
+                  }
+                  this.certainNum(nnn());
+               }
+               this.chaos();
+            } else {
+               this.randomNum();
+            }
+            //调用updateView()，更行页面
+            this.updateView();
+         }
+      },
+
+      chaos: function () {
+         copy = [
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0],
+            [0, 0, 0, 0]
+         ];
+
+
+         for (var r = 0; r < this.rn; r++) {
+            copy[r][0] = this.data[r][this.cn - 1];
+            for (var c = 1; c < this.cn; c++) {
+               copy[r][c] = this.data[r][c - 1];
+            }
+         }
+
+         this.data = copy;
+      },
+
+      isFull: function () { //判断当前数组是否已满
+         for (var row = 0; row < this.rn; row++) { //遍历二维数组
+            for (var col = 0; col < this.cn; col++) {
+               // 只要发现当前元素==0
+               if (this.data[row][col] == 0) {
+                  return false;
+               }
+            }
+         }
+         //(如果循环正常退出)
+         return true;
+      },
+      randomNum: function () { //在随机空位置生成一个数
+         if (!this.isFull()) { //如果*不*满，才{
+            while (true) { //循环true
+               //0-3随机生成一个行号row
+               var row = parseInt(Math.random() * this.rn);
+               //0-3随机生成一个列号col
+               var col = parseInt(Math.random() * this.cn);
+               //如果data[row][col]==0
+               if (this.data[row][col] == 0) {
+                  // Math.random():<0.5 >=0.5
+                  //     2  4
+                  // 随机生成一个数<0.5?2:4，
+                  // 放入data[row][col]
+                  this.data[row][col] =
+                     Math.random() < 0.5 ? 2 : 4;
+                  break; //退出循环 
+               }
+            }
+         }
+      },
+      /* div:造数字 */
+      certainNum: function (num) { //指定生成数字
+         if (!this.isFull()) { //如果*不*满，才{
+            while (true) { //循环true
+               //0-3随机生成一个行号row
+               var row = parseInt(Math.random() * this.rn);
+               //0-3随机生成一个列号col
+               var col = parseInt(Math.random() * this.cn);
+               //如果data[row][col]==0
+               if (this.data[row][col] == 0) {
+                  // Math.random():<0.5 >=0.5
+                  //     2  4
+                  // 随机生成一个数<0.5?2:4，
+                  // 放入data[row][col]
+                  this.data[row][col] =
+                     num;
+                  break; //退出循环 
+               }
+            }
+         }
+      },
+      updateView: function () {
+         //将二维数组中每个格的数字放入前景格中
+         //遍历二维数组中每个元素,比如:row=2,col=3, 16
+         for (var row = 0; row < this.rn; row++) {
+            for (var col = 0; col < this.cn; col++) {
+               /*网页中一切元素，属性，文字都是对象*/
+               var div = document.getElementById("c" + row + col);
+               //"c23"
+               if (this.data[row][col] < 0) {
+                  this.data[row][col] = -64;
+               }
+               if (this.mode == 4) {
+                  this.data[row][col] *= 2;
+               }
+               var curr0 = this.data[row][col]; //当前元素值
+               var curr = curr0 > 8192 ? 8192 : curr0;
+               this.data[row][col] = curr;
+
+               //修改div开始标签和结束标签之间的内容div:
+               function aaa() {
+                  if (curr == 0) {
+                     return "";
+                  } else if (curr < 0) {
+                     return "X";
+                  } else if (curr == 3) {
+                     return "这"
+                  } else if (curr == 6) {
+                     return "是"
+                  } else if (curr == 12) {
+                     return "彩"
+                  } else if (curr == 24) {
+                     return "蛋"
+                  } else if (curr == 204) {
+                     return "密"
+                  } else if (curr == 207) {
+                     return "码"
+                  } else if (curr == 210) {
+                     return "就"
+                  } else if (curr == 213) {
+                     return "是"
+                  } else if (curr == 216) {
+                     return "的"
+                  } else if (curr == 219) {
+                     return "等"
+                  } else if (curr == 222) {
+                     return "差"
+                  } else if (curr == 225) {
+                     return "中"
+                  } else if (curr == 228) {
+                     return "项"
+                  } else if (curr == 666) {
+                     return "爱"
+                  } else if (curr == 333) {
+                     return "信"
+                  } else if (curr == 234) {
+                     return "不"
+                  } else if (curr == 18) {
+                     if (puzzleFlag5) {
+                        alert("恭喜通关!");
+                        alert("level4的密码就是'爱'字对应的数值!")
+                     };
+                     return "?"
+                  } else if (curr == 258) {
+                     document.getElementById("mainTitle").innerHTML = "对着混沌的空气输'check'";
+                     puzzleFlag5 = true;
+                     return "见↑"
+                  } else if (curr == 2204) {
+                     puzzleFlag1 = true;
+                     return "按0"
+                  } else {
+                     return curr;
+                  }
+               }
+               div.innerHTML = aaa();
+               //修改div的class属性
+               function bbb() {
+                  if (curr == 0) {
+                     return "cell";
+                  } else if (curr == 1) {
+                     return "cell n1";
+                  } else if (curr < 0) {
+                     return "cell X";
+                  } else if (curr % 3 == 0) {
+                     return "cell word"
+                  } else {
+                     return "cell n" + curr;
+                  }
+               }
+               div.className = bbb();
+               //curr!=0?"cell n"+curr:"cell"
+               // class
+            }
+         }
+         var span = document.getElementById("score");
+         span.innerHTML = this.score;
+         //判断并修改游戏状态为GAMEOVER
+         if (this.isGameOver()) {
+            this.toGameOver();
+         }
+      }, //updateView方法的结束
+
+      //gameOver方法
+      toGameOver: function () {
+         this.state = this.GAMEOVER;
+         stopClock();
+         var div = document.getElementById("gameOver");
+         var span = document.getElementById("finalScore");
+         span.innerHTML = this.score;
+         //修改div的style属性下的display子属性为"block"
+         div.style.display = "block";
+         var highScores = document.getElementById("highScores");
+         record(this.score);
+      },
+
+
+      /*实现左移*/
+      /*找当前位置右侧，*下一个*不为0的数*/
+      getRightNext: function (row, col) {
+         //循环变量:nextc——>指下一个元素的列下标
+         //从col+1开始,遍历row行中剩余元素，<cn结束
+         for (var nextc = col + 1; nextc < this.cn; nextc++) {
+            // 如果遍历到的元素!=0
+            if (this.data[row][nextc] != 0) {
+               //  就返回nextc
+               return nextc;
+            }
+         }
+         return -1; //(循环正常退出，就)返回-1
+      },
+      /*判断并左移*指定行*中的每个元素*/
+      moveLeftInRow: function (row) {
+         //col从0开始，遍历row行中的每个元素，<cn-1结束
+         for (var col = 0; col < this.cn - 1; col++) {
+            // 获得当前元素下一个不为0的元素的下标nextc
+            var nextc = this.getRightNext(row, col);
+            // 如果nextc==-1，(说明后边没有!=0的元素了)
+            if (nextc == -1) {
+               break;
+            } else { // 否则
+               //  如果当前位置==0,
+               if (this.data[row][col] == 0) {
+                  //   将下一个位置的值，当入当前位置
+                  this.data[row][col] =
+                     this.data[row][nextc];
+                  //   下一个位置设置为0
+                  this.data[row][nextc] = 0;
+                  col--; //让col退一格，重复检查一次
+               } else if (this.data[row][col] ==
+                  this.data[row][nextc]) {
+                  //  否则，如果当前位置==nextc的位置
+                  //   将当前位置*=2;
+                  this.data[row][col] *= 2;
+                  //   下一个位置设置为0;
+                  this.data[row][nextc] = 0;
+                  //   将当前位置的值，累加到score上
+                  this.score += this.data[row][col];
+               }
+            }
+         }
+      },
+      /*移动所有行*/
+      moveLeft: function () {
+         var oldStr = this.data.toString();
+         //循环遍历每一行
+         for (var row = 0; row < this.rn; row++) {
+            // 调用moveLeftInRow方法，传入当前行号row
+            this.moveLeftInRow(row);
+         } //(循环结束后)
+         this.nextStep(oldStr);
+      },
+      moveRight: function () {
+         var oldStr = this.data.toString();
+         for (var row = 0; row < this.rn; row++) {
+            this.moveRightInRow(row);
+         }
+         this.nextStep(oldStr);
+      },
+      /*判断并右移*指定行*中的每个元素*/
+      moveRightInRow: function (row) {
+         //col从cn-1开始，到>0结束
+         for (var col = this.cn - 1; col > 0; col--) {
+            var nextc = this.getLeftNext(row, col);
+            if (nextc == -1) {
+               break;
+            } else {
+               if (this.data[row][col] == 0) {
+                  this.data[row][col] =
+                     this.data[row][nextc];
+                  this.data[row][nextc] = 0;
+                  col++;
+               } else if (this.data[row][col] ==
+                  this.data[row][nextc]) {
+                  this.data[row][col] *= 2;
+                  this.data[row][nextc] = 0;
+                  this.score += this.data[row][col];
+               }
+            }
+         }
+      },
+      /*找当前位置左侧，下一个不为0的数*/
+      getLeftNext: function (row, col) {
+         //nextc从col-1开始，遍历row行中剩余元素，>=0结束
+         for (var nextc = col - 1; nextc >= 0; nextc--) {
+            // 遍历过程中，同getRightNext
+            if (this.data[row][nextc] != 0) {
+               return nextc;
+            }
+         }
+         return -1;
+      },
+      /*获得任意位置下方不为0的位置*/
+      getDownNext: function (row, col) {
+         //nextr从row+1开始，到<this.rn结束
+         for (var nextr = row + 1; nextr < this.rn; nextr++) {
+            if (this.data[nextr][col] != 0) {
+               return nextr;
+            }
+         }
+         return -1;
+      },
+      /*判断并上移*指定列*中的每个元素*/
+      moveUpInCol: function (col) {
+         //row从0开始，到<rn-1，遍历每行元素
+         for (var row = 0; row < this.rn - 1; row++) {
+            // 先获得当前位置下方不为0的行nextr
+            var nextr = this.getDownNext(row, col);
+            if (nextr == -1) {
+               break; // 如果nextr==-1
+            } else { // 否则
+               //  如果当前位置等于0
+               if (this.data[row][col] == 0) {
+                  //   将当前位置替换为nextr位置的元素
+                  this.data[row][col] =
+                     this.data[nextr][col];
+                  //   将nextr位置设置为0
+                  this.data[nextr][col] = 0;
+                  row--; //退一行，再循环时保持原位
+               } else if (this.data[row][col] ==
+                  this.data[nextr][col]) {
+                  //  否则，如果当前位置等于nextr位置
+                  //   将当前位置*=2
+                  this.data[row][col] *= 2;
+                  //   将nextr位置设置为0
+                  this.data[nextr][col] = 0;
+                  //   将当前位置的值累加到score属性上
+                  this.score += this.data[row][col];
+               }
+            }
+         }
+      },
+      /*上移所有列*/
+      moveUp: function () {
+         var oldStr = this.data.toString();
+         //遍历所有列
+         for (var col = 0; col < this.cn; this.moveUpInCol(col++));
+         this.nextStep(oldStr);
+      },
+      /*下移所有列*/
+      moveDown: function () {
+         var oldStr = this.data.toString();
+         for (var col = 0; col < this.cn; this.moveDownInCol(col++));
+         this.nextStep(oldStr);
+      },
+      moveDownInCol: function (col) {
+         //row从this.rn-1，到>0结束，row--
+         for (var row = this.rn - 1; row > 0; row--) {
+            var nextr = this.getUpNext(row, col);
+            if (nextr == -1) {
+               break;
+            } else {
+               if (this.data[row][col] == 0) {
+                  this.data[row][col] =
+                     this.data[nextr][col];
+                  this.data[nextr][col] = 0;
+                  row++;
+               } else if (this.data[row][col] ==
+                  this.data[nextr][col]) {
+                  this.data[row][col] *= 2;
+                  this.data[nextr][col] = 0;
+                  this.score += this.data[row][col];
+               }
+            }
+         }
+      },
+      /*获得任意位置上方不为0的位置*/
+      getUpNext: function (row, col) {
+         for (var nextr = row - 1; nextr >= 0; nextr--) {
+            if (this.data[nextr][col] != 0) {
+               return nextr;
+            }
+         }
+         return -1;
+      }
+   }
+   /*
+
+   V1:隐藏式触控按钮--mobile专享
+
+   */
+   var handler = {
+      left: function () {
+         game.moveLeft()
+      },
+      right: function () {
+         game.moveRight()
+      },
+      up: function () {
+         game.moveUp()
+      },
+      down: function () {
+         game.moveDown()
+      }
+   }
+
+   /*
+
+   V2:计分榜--玩家名&大小排序
+
+   */
+   var scores = [];
+   var scoresDisplay = document.getElementById("scoresDisplay");
+
+   function record(n) {
+      var playerName = prompt("玩家名(输完名字就知道自己怎么为什么挂了)");
+      var theMode;
+      var theFlag = true;
+      if (game.mode == 0) {
+         theMode = "经典"
+      } else if (game.mode == 1) {
+         theMode = "竞速"
+      } else if (game.mode == 2) {
+         theMode = "双倍"
+      } else if (game.mode == 3) {
+         theMode = "挑战"
+      } else if (game.mode == 4) {
+         theMode = "万宁";
+         alert("万宁成绩将做负数处理!");
+         theFlag = false;
+      } else if (game.mode == 5) {
+         theMode = "混沌"
+      }
+      var thisScore = theFlag ? [n, playerName, theMode] : [-n, playerName, theMode];
+      scores.push(thisScore);
+      rearrange(scores);
+      scoresDisplay.innerHTML = "";
+      for (var s = 0; s < scores.length; s++) {
+         scoresDisplay.innerHTML += "<br>" + scores[s][1] + "：" + "<br>" + scores[s][0] + "/" + scores[s][2];
+
+
+      }
+   }
+
+   function rearrange(array) {
+      var copy = array;
+      var len = array.length;
+      for (var a = 0; a < len; a++) {
+         for (var b = a; b < len; b++) {
+            if (copy[a][0] < copy[b][0]) {
+               var c = copy[a];
+               copy[a] = copy[b];
+               copy[b] = c;
+            }
+         }
+      }
+      scores = copy;
+   }
+
+   /*V3 竞速模式的计时器*/
+
+   var count = 0; // 记录开始后当前的毫秒数
+   var timer; // 定时器返回值，用于停止定时器
+   var clockFlag = false; // 增加判断，防止重复点击开始导致有多个定时器同时计数
+   /* 计时 */
+   var id_M = document.getElementById("id_M");
+   var id_S = document.getElementById("id_S");
+   var id_MS = document.getElementById("id_MS");
+
+
+
+   function startClock() {
+
+      if (clockFlag) {
+         clearInterval(timer); // 处理没按空格键停止就再次点击"START"的情况
+      }
+      clockFlag = true;
+
+      var theClock = document.getElementById("time");
+      theClock.style.display = "block";
+      /* 计时器 */
+      var ms = new Date().getTime();
+      timer = setInterval(function () {
+         count = new Date().getTime() - ms;
+         id_M.innerText = handleTime1(parseInt(count / 1000 / 60));
+         id_S.innerText = handleTime1(parseInt(count / 1000 % 60));
+         id_MS.innerText = handleTime2(count % 1000);
+
+         if (count > settings.time) {
+            game.toGameOver();
+         }
+      }, settings.times);
+
+
+   }
+
+
+   /* 处理时间(分、秒) */
+   function handleTime1(num) {
+      if (num < 10) {
+         return '0' + num;
+      }
+      return num;
+   }
+   /* 处理时间(毫秒) */
+   function handleTime2(num) {
+      if (num < 10) {
+         return "00" + num;
+      } else if (num < 100) {
+         return '0' + num;
+      }
+      return num;
+   }
+
+   function stopClock() {
+      var theClock = document.getElementById("time");
+      theClock.style.display = "none";
+      clearInterval(timer);
+      clockFlag = false;
+   }
+
+   //V5设置读取
+   /*
+   var inputSettings;
+      var fileElement = document.getElementById("file");
+        fileElement.addEventListener('change', (e) => {
+            const file = e.target.files[0];// 文件信息
+             if (file) {
+                 const reader = new FileReader();
+                 reader.readAsText(file);// 将文件读取为文本
+                 reader.onload = () => { // 文件读取完成后的回调
+                     console.log("读取内容如下\r\n",reader.result,"\r\n////"); // 读取到的文件内容
+                     inputSettings = reader.result;
+                     dealSettings(inputSettings.split("\r\n"));
+                 }
+                 reader.onerror = (e) => {
+                     console.log(e, '????XXX')
+                 }
+              }
+        })
+   */
+   function dealSettings(array) {
+      alert("读取设置成功!")
+      alert("但可惜这个功能暂时没啥用///-_-")
+   }
+
+   //V6限制按键频率
+   function tpsSwitch() {
+      if (tpsFlag) {
+         tpsFlag = false;
+         tpsLimitOff();
+      } else if (game.mode == 1 && settings.tpsLimitSetting) {
+         tpsFlag = true;
+         tpsLimitOn();
+      }
+   }
+
+   function tpsLimitOn() {
+      tpsTimer = setInterval(function () {
+         tap1 = taps;
+         tapLimit = false;
+      }, settings.tpsLimitInterval);
+   }
+
+   function tpsLimitOff() {
+      tapLimit = false;
+      clearInterval(tpsTimer);
+   }
+
+
+   var flag75 = false;
+   var title = document.getElementById("title");
+   var tpsFlag = false;
+   var taps = 0;
+   var tap1;
+   var tapMax = settings.tps;
+   var tapLimit = false;
+   var tpsTimer;
+   var dzzFlag = false;
+   var puzzleFlag1 = false;
+   var puzzleFlag2 = false;
+   var puzzleFlag3 = false;
+   var puzzleFlag4 = false;
+   var puzzleFlag5 = false;
+   var puzzleFlag6 = false;
+   var ababababa = 0
+   //onload事件：当页面加载*后*自动执行
+   window.onload = function () {
+      game.start(); //页面加载后，自动启动游戏
+      //当按键盘按键时，触发移动:
+      //TAG 按键
+      document.onkeydown = function () {
+         taps++;
+         title.style.display = "none";
+         if (tpsFlag) {
+            if (taps > tap1 + tapMax && !tapLimit) {
+               tapLimit = true;
+            }
+         }
+         //获得事件对象中键盘号：2步
+         //事件对象：在事件发生时自动创建
+         //   封装了事件的信息
+         var e = window.event || arguments[0];
+         if (game.state == game.RUNNING && !tapLimit) {
+            //Step1: 获得事件对象
+
+            //IE   DOM标准
+            //Step2: 获得键盘号:e.keyCode
+            if (e.keyCode == settings.leftKey[0] || e.keyCode == settings.leftKey[1]) {
+               game.moveLeft();
+            } else if (e.keyCode == settings.rightKey[0] || e.keyCode == settings.rightKey[1]) {
+               game.moveRight();
+            } else if (e.keyCode == settings.upKey[0] || e.keyCode == settings.upKey[1]) {
+               game.moveUp();
+            } else if (e.keyCode == settings.downKey[0] || e.keyCode == settings.downKey[1]) {
+               game.moveDown();
+            }
+            //如果按左键，调用moveLeft
+            //否则如果按右键，调用moveRight
+         }
+         /*
+         if (e.keyCode==userSetKey1){userSetFunction1()}
+         else if (e.keyCode==userSetKey2){userSetFunction2()}
+         else if (e.keyCode==userSetKey3){userSetFunction3()}
+         */
+
+         switch (e.keyCode) {
+            case 32:
+               //空格键
+               if (clockFlag) {
+                  stopClock()
+               }
+               game.mode = 0;
+               tpsSwitch();
+               game.start();
+               break;
+            case 79:
+               //"O"
+               game.toGameOver();
+               break;
+            case 90:
+               //"Z"
+               var dzz = document.createElement("div");
+               dzz.id = "dzz"
+               dzz.innerHTML = "已检测到DZZ正在操作中";
+               var dzzAlert = document.getElementById("dzzAlert");
+
+               if (!dzzFlag) {
+                  dzzAlert.appendChild(dzz);
+               } else {
+                  dzzFlag = false;
+                  game.score = settings.score;
+               }
+               break;
+            case 75:
+               //"K"
+               if (puzzleFlag6 && game.mode == 5) {
+                  alert("究极彩蛋在此!!!");
+                  alert("注意,现在,不会再出新数字");
+                  alert("其他规则照旧");
+                  game.data = [
+                     [204, 207, 210, 213],
+                     [12, 24, 216, 0],
+                     [219, 222, 225, 228],
+                     [666, 333, 234, 333]
+                  ];
+                  game.updateView();
+                  puzzleFlag6 = false;
+               } else {
+                  var div75 = document.getElementById("keyInfo");
+                  if (!flag75) {
+                     div75.style.display = "block";
+                     flag75 = true;
+                  } else {
+                     div75.style.display = "none";
+                     flag75 = false;
+                  }
+
+               }
+               break;
+            case settings.mode1Key:
+               //"T"
+               //暗黑竞速模式
+               if (clockFlag) {
+                  stopClock()
+               }
+               game.mode = 1;
+               game.start();
+               startClock();
+               tpsSwitch();
+               if (puzzleFlag4) {
+                  stopClock();
+                  var theClock = document.getElementById("time");
+                  theClock.style.display = "block";
+                  id_M.innerText = "04";
+                  id_S.innerText = "18";
+                  id_MS.innerText = "几分钟?";
+
+               }
+               break;
+            case 82:
+               //"R"
+               //旋转
+               var copyData = [
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0],
+                  [0, 0, 0, 0]
+               ];
+               for (var row = 0; row < game.rn; row++) {
+                  for (var col = 0; col < game.cn; col++) {
+                     copyData[row][col] = game.data[col][game.cn - 1 - row];
+
+                  }
+               }
+               game.data = copyData;
+               game.updateView()
+               break;
+            case settings.mode2Key:
+               //"D"
+               //火红双倍模式
+               if (clockFlag) {
+                  stopClock()
+               }
+               game.mode = 2;
+               tpsSwitch();
+               game.start();
+               if (puzzleFlag2) {
+                  puzzleFlag3 = true;
+                  var li1 = document.getElementById("li1")
+                  li1.innerHTML = "去看看其他模式!"
+                  li1.style.fontSize = 3.2 + "em";
+                  li1.style.fontWeight = 20 + "px";
+                  li1.style.lineHeight = 1 + "em";
+                  li1.style.color = "#44444444";
+                  li1.style.animationDuration = 5 + "s";
+               }
+               break;
+            case settings.mode3Key:
+               //"C"
+               //X方块挑战模式
+               if (clockFlag) {
+                  stopClock()
+               }
+               game.mode = 3;
+               tpsSwitch();
+               game.start();
+               if (puzzleFlag3) {
+                  puzzleFlag4 = true;
+                  var li2 = document.getElementById("li2")
+                  li2.innerHTML = "去看竞速!"
+                  li2.style.fontSize = 2.8 + "em";
+                  li2.style.fontWeight = 20 + "px";
+                  li2.style.lineHeight = 1 + "em";
+                  li2.style.color = "#44444444";
+                  li2.style.animationDuration = 5 + "s";
+               }
+               break;
+            case settings.mode4Key:
+               //"W"
+               //万宁模式
+               if (game.mode == 4) {
+                  game.certainNum(prompt("下一个出什么数字?"));
+                  game.updateView();
+               } else {
+                  if (clockFlag) {
+                     stopClock()
+                  }
+                  game.mode = 4;
+                  tpsSwitch();
+                  game.start();
+               }
+
+               break;
+            case settings.mode5Key:
+               //混沌模式
+               if (clockFlag) {
+                  stopClock()
+               }
+               game.mode = 5;
+               tpsSwitch();
+               game.start();
+
+
+               break;
+            default:
+               break;
+
+
+         }
+
+         if (e.keyCode == 48) {
+            if (puzzleFlag2) {
+               game.certainNum(prompt("下一个出什么数字?"));
+               game.updateView();
+            }
+            if (puzzleFlag1) {
+               puzzleFlag1 = false;
+               puzzleFlag2 = true;
+               alert("看来你把彩蛋玩明白了,接下来是level3的最后考验...");
+               alert("现在,按键'0'取代了创造方块的能力,你可以在任意模式中使用");
+               alert("运用这个能力去寻找线索吧!");
+               var li = document.getElementById("li")
+               li.innerHTML = "注意彩蛋!"
+               li.style.fontSize = 3.6 + "em";
+               li.style.fontWeight = 20 + "px";
+               li.style.lineHeight = 1 + "em";
+               li.style.color = "#44444444";
+               li.style.animationDuration = 4 + "s";
+            }
+         }
+         if (puzzleFlag5 && game.mode == 5) {
+            switch (e.keyCode) {
+               case 67:
+                  if (ababababa == 79 - 90) {
+                     puzzleFlag6 = true;
+                  }
+                  ababababa = 0
+                  break;
+               case 72:
+                  ababababa += 79;
+                  break;
+               case 69:
+                  ababababa -= 90;
+                  break;
+               default:
+                  ababababa = 0
+            }
+         }
+      }
+      setTimeout(() => {
+         title.style.display = "none";
+      }, 3000);
+   }
+</script>
+
+</html>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tools on zhyDaDa的个人站点</title>
+    <link>https://zhydada.github.io/tags/tools/</link>
+    <description>Recent content in tools on zhyDaDa的个人站点</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 25 Oct 2022 19:07:09 +0800</lastBuildDate><atom:link href="https://zhydada.github.io/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>背书机mobile</title>
+      <link>https://zhydada.github.io/posts/%E8%83%8C%E4%B9%A6%E6%9C%BAmobile/</link>
+      <pubDate>Tue, 25 Oct 2022 19:07:09 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/%E8%83%8C%E4%B9%A6%E6%9C%BAmobile/</guid>
+      <description>自制背书机上线了! 点我跳转 mobile版 针对手机端做出大改, 所有的板块也基本改成了错题本的形式, 任意添加 终于也是完成了存档的机制, 可以不用怕</description>
+    </item>
+    
+    <item>
+      <title>小工具</title>
+      <link>https://zhydada.github.io/posts/%E5%B0%8F%E5%B7%A5%E5%85%B7/</link>
+      <pubDate>Wed, 17 Aug 2022 15:32:08 +0800</pubDate>
+      
+      <guid>https://zhydada.github.io/posts/%E5%B0%8F%E5%B7%A5%E5%85%B7/</guid>
+      <description>说明 用于特定用途的实用工具, 功能较为简易 部分有抄袭/借鉴, 如站长工具, 侵删 一览表(点击名称跳转) 名称 功能 随机数 生成随机数, 也夹带了随机密码的</description>
+    </item>
+    
+  </channel>
+</rss>

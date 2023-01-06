@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tetris</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #gameDisplay{
+            position: relative;
+            align-items: center;  
+            background-color: rgba(0, 0, 0, 0.4);
+            height: 650px;
+            width: 600px;
+            left: 50%;
+            top: 50%;  
+            transform: translate(-50%,-50%);  
+            border-radius: 10px;      
+        }
+        #mainGameBoard{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            align-items: center;  
+            transform: translate(-85%,-50%);        
+        }
+        .sqr{
+            border: solid #f8f8ff88 0.2px;
+            height: 30px;
+            width: 30px;
+            position: absolute;
+            float: left;
+            border-radius: 8px;
+        }
+        .style99{ background-color: hsl(0, 0%, 50%); } 
+        .style0{ background-color: #ffffff00; } /* 空 */
+        .style1{ background-color: #88A6BB; } /* Z */
+        .style2{ background-color: #B1CEA2; } /* S */
+        .style3{ background-color: #FFBE00; } /* 反L */
+        .style4{ background-color: #9A55EF; } /* L */
+        .style5{ background-color: #2EAEF7; } /* T */
+        .style6{ background-color: #B0DD16; } /* 棍子 */
+        .style7{ background-color: #FF005D; } /* 正方 */
+        .style8{ background-color: hsl(300, 91%, 40%); } /* 十字 */
+        .style9{ background-color: hsl(53, 86%, 40%); }  /* 凹 */
+        .style10{ background-color: hsl(261, 98%, 49%); } /* 大S */
+        .style11{ background-color: hsl(120, 98%, 49%); } /* 大Z */
+
+        #scoreDisplay{
+            width: 150px;
+            height: 70px;
+            padding: 25px;
+            position: absolute;
+            left: 50%;
+            top: 0%;
+            text-align: center;
+            align-items: center;  
+            vertical-align: middle;
+            transform: translate(35%,20%);    
+            color: bisque;
+            background-color: #deb88744;
+            font-size: 26px;
+            line-height: 2.3em;
+            border-radius: 10px;
+        }
+        #nextDisplay{
+            width: 150px;
+            height: 200px;
+            padding: 25px;
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            text-align: center;
+            align-items: center;  
+            vertical-align: middle;
+            transform: translate(35%,20%);    
+            color: bisque;
+            background-color: #deb88744;
+            border-radius: 10px;
+            line-height: 4em;
+        }
+
+        #nextDisplay>p{
+            text-align: center;
+            color: bisque;
+            font-size: 18px;
+            max-height: 20px;
+            line-height: 0px;
+        }
+        
+        #container {
+            padding: 0;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+        }
+        #output {
+            position: absolute;
+                width: 100%;
+                height: 100%;
+        }
+        /* div: 开头动画*/
+        #title{width:100%; height:100%; position:absolute; top:0; left:0; display:block;align-items:center;justify-content:space-around;overflow:hidden;          }
+        #whiteBoard{width:100%; height:100%; position:absolute; top:0; left:0; display:block;background-color: #fff;animation: zoomOut2 0.5s 2.5s forwards}
+        .container{min-height:100vh;display:flex;flex-direction:column;text-align:center;overflow:hidden;animation: zoomOut1 1s 2s forwards;}
+        .title{color:#35495e;width:100%;top:25vh;font-weight:100;font-size:8vh;letter-spacing:1px;position:relative;}
+        .zoomIn{animation:1.2s forwards;
+                    animation-name:zoomIn}
+        @keyframes zoomIn{
+            0%{-webkit-transform:scale(4);
+            transform:scale(4);
+            opacity:0}}
+        @keyframes zoomOut1 {
+            90%{
+                transform: scale(2);
+                opacity: 0;
+            }
+            100%{
+                transform: scale(0);
+                opacity: 0;
+            }
+            
+        }
+        @keyframes zoomOut2 {
+            90%{
+                transform: scale(1);
+                opacity: 0;
+            }
+            100%{
+                transform: scale(0);
+                opacity: 0;
+            }
+        }
+            /* div: 其他的Board */
+
+        @keyframes alerter {
+            0%{top: -800px;}
+            20%{
+                top:20px;
+            }
+            80%{
+                top: 20px;
+            }
+            100%{
+                top: -800px;
+            }
+        }
+        .alerter{
+            position: fixed;
+            display: block;
+            font-size: 32px;
+            line-height: 200px;
+            right: 20px;
+            top:-800px;
+            width: 400px;
+            height: 200px;
+            background-color: #002B36;
+            color: ghostwhite;
+            text-align: center;
+            border: grey 4px solid;
+            border-radius: 6px;
+            animation:alerter 4.5s forwards;
+            transition-timing-function:linear;
+            animation-delay:-0.2s;
+        }
+        #noticeBoard{
+            position: fixed;
+            display: block;
+            font-size: 26px;
+            font-style: normal;
+            line-height: 200px;
+            right: 20px;
+            top:-800px;
+            width: 400px;
+            height: 200px;
+            background-color: darkviolet;
+            color: ghostwhite;
+            text-align: center;
+            border: grey 4px solid;
+            border-radius: 6px;
+        }
+
+        #highScores{
+            margin-left: 0px;
+            position: fixed;
+            left: 0px;
+            text-align: center;
+            font-size: 40px;
+            color: ghostwhite;
+            background-color:#bbada0aa;
+            display: block;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        #highScores:before{
+            content: attr(data-content-before);
+            font-family: Microsoft YaHei;
+        }
+
+        .footer{      
+            display: flex;      
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 40px;/*脚部的高度*/
+            background: #f5f5f566;
+            clear:both;
+            font-size: 22px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        #menuFooter{
+            bottom: 1px;
+        }
+        #footer{
+            bottom: 42px;
+        }
+        .footer>h1{         
+            display: flex; 
+            float: left;
+            width: 30px;
+            padding: 3px;
+            height: 30px;/*脚部的高度*/
+            background: #b8860b;
+            color: ghostwhite;
+            font-size: 20px;
+            border-radius: 4px;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .footer>h2{            
+            display: flex;
+            float: left;
+            bottom: 0;
+            padding: 2px;
+            height: 30px;/*脚部的高度*/
+            color: ghostwhite;
+            font-size: 20px;
+        }
+        .footer>h2::after{content: "  ";}
+
+        /*Game Over*/
+        #gameOver{
+            width:100%; 
+            height:100%;
+            position:absolute; 
+            top:0; left:0;
+            display:none;
+        }
+        #gameOver>div{
+            width:100%; 
+            height:100%;
+            background-color:#555; 
+            opacity:.5;
+        }
+        #gameOver>p{
+            width:300px;
+            height:200px;
+            border:1px solid #edcf72;
+            line-height:1.6em; 
+            text-align:center;
+            background-color:#fff; 
+            border-radius:10px;
+            position:absolute; 
+            top:50%; left:50%;
+            margin-top:-135px; 
+            margin-left:-235px;
+            width:480px; 
+            font-family:Arial;
+            font-weight:bold;
+            font-size:40px; 
+            padding-top:15px;
+        }
+        .button{
+            padding:10px; border-radius:6px;
+            background-color:#9f8b77; 
+            color:#fff;
+            cursor:pointer;
+        }
+
+
+    </style>
+</head>
+<script src="js/jquery.js"></script>
+<script src="js/vector.js"></script>
+<script src="js/tetris_json.js"></script>
+<script src="js/settings.js"></script>
+<script src="js/tetris.js"></script>
+<script src="js/modes.js"></script>
+<!-- div:BODY -->
+<body onload="game.start(0)">
+    <div id="container">
+      <div id="output"></div>
+      <div id = "gameDisplay">
+        <div id = "mainGameBoard"></div>
+        <div id = "scoreDisplay">Score: <span id ="score" >0</span></div>
+        <div id = "nextDisplay"><p>下一个Tetris:</p><div id="nextDisplayMap"></div></div>
+      </div>
+
+      <div id = "alerterContainer"></div>
+
+      <div id = "footer" class = "footer">
+          <!-- 标准 -->
+          <h1>W</h1>
+          <h2>旋转</h2>
+          <h1>A</h1>
+          <h2>向左</h2>
+          <h1>S</h1>
+          <h2>向下</h2>
+          <h1>D</h1>
+          <h2>向右</h2>
+          <h1 style='font-size:15px;'>空格</h1>
+          <h2>暂停/继续</h2>
+          <h1>F</h1>
+          <h2>开启GM模式</h2>
+          
+      </div>
+      <div id = "menuFooter" class = "footer">
+          <!-- 菜单 -->
+          <h1>1</h1>
+          <h2>经典模式</h2>
+          <h1>2</h1>
+          <h2>加强模式</h2>
+          <h1>3</h1>
+          <h2>障碍模式</h2>
+      </div>
+    </div>
+  
+    <div id = "noticetBoard"></div>
+    <table id = "highScores">
+    </table>
+    <div id="gameOver"><!--同时包含前景和背景的容器-->
+        <div><!--半透明灰色背景--></div>
+        <p><!--居中小窗口-->
+            Game Over!<br>
+            Score:<span id="finalScore"></span><br>
+            <a class="button" onclick="game.start()">按空格重启</a>
+        </p>
+    </div>
+  
+    <div id="title">
+      <div id="whiteBoard"></div>
+      <div class="container">
+         <div class="title zoomIn">
+            <h2>Tetris</h2><h9>V 3.9.4</h9><h4>by zhyDaDa</h4>
+         </div>
+      </div>
+    </div>
+</body>
+<script>
+
+    /* div:声明 */
+    var t,newType=parseInt(Math.random() * kindsOfType) + 1;
+    function drop(){
+        var nowTime = Date.now();
+        var timeDelta = nowTime - dropStart;
+        if(timeDelta>game.speed){t.moveInColumn(1);drawMap();dropStart=Date.now();}
+    }
+    window.dropStart = Date.now();
+    window.nowTime = dropStart;
+    var dropTimer;
+
+    var GM_enable = false;
+
+    /* div:alerter */
+    function sendAlerter(content){
+        document.getElementById("alerterContainer").innerHTML = "";
+        let alerter = document.createElement("div");
+        alerter.className = "alerter";
+        alerter.textContent = content;          
+        document.getElementById("alerterContainer").appendChild(alerter);
+    }
+
+    /* div:game */
+    window.game = {
+        pause:false,
+        end:false,
+        score:0,
+        mode:1,
+        speed:10,
+        pool:[],
+        start:function(mode){
+            document.getElementById("gameOver").style.display = "none";
+            this.end = false;
+
+            this.mode = mode?mode:game.mode;
+            /* todo:初始化 */
+            this.score = 0;
+            this.speed = 500;
+            initMap();
+            modes.start(this.mode);
+            newType=parseInt(Math.random() * kindsOfType) + 1
+            createNewTetris();
+            document.getElementById("score").innerHTML = this.score
+            drawMap();
+            dropTimer = setInterval("if(!game.pause&&!game.end){drop()}",10);
+            sendAlerter(modes.names[this.mode-1]+"模式");
+            record(-1,this.mode);
+            $('#highScores').attr("data-content-before",modes.names[this.mode-1]+'模式 高分榜');
+        },
+        goToEnd:function(){
+            /* todo:结束 */
+            this.end=true;
+            var div=document.getElementById("gameOver");
+            var span=document.getElementById("finalScore");
+            span.innerHTML=this.score;
+            if(GM_enable) span.innerHTML = "非正常结束不计分"
+            div.style.display="block";
+            if(!GM_enable) record(this.score,this.mode);
+            
+        },
+        
+        /**TODO:每当分数更改的时候调用  */
+        checkScore:function(){
+            let theSpeed = this.speed;
+            if(this.score>2000) this.speed = 50;
+            else if(this.score>1500) this.speed = 65;
+            else if(this.score>1000) this.speed = 80;
+            else if(this.score>900) this.speed = 80;
+            else if(this.score>800) this.speed = 100;
+            else if(this.score>700) this.speed = 120;
+            else if(this.score>600) this.speed = 135;
+            else if(this.score>500) this.speed = 150;
+            else if(this.score>300) this.speed = 200;
+            else if(this.score>150) this.speed = 250;
+            else if(this.score>100) this.speed = 300;
+            else if(this.score>50) this.speed = 360;
+            if (theSpeed!=this.speed){
+                let theSpeed = 1 + Math.floor(5000/this.speed)/100;
+                sendAlerter("当前速度为"+theSpeed+"倍");
+            }
+            document.getElementById("score").innerHTML = this.score;
+        }
+
+    }
+    /* div:高分榜 */
+    var _scores = "0,player";
+    var scores = [];
+    var scores1=[],scores2=[],scores3=[];
+    var highScores = document.getElementById("highScores");
+    function record (score,mode){
+        switch(mode){
+            case 1:
+                scores = scores1;
+                _scores = localStorage.getItem("scores1")?localStorage.getItem("scores1"):"0,player";
+                break;
+            case 2:
+                scores = scores2;
+                _scores = localStorage.getItem("scores2")?localStorage.getItem("scores2"):"0,player";
+                break;
+            case 3:
+                scores = scores3;
+                _scores = localStorage.getItem("scores3")?localStorage.getItem("scores3"):"0,player";
+                break;
+        }
+        if(score>=0)  {var playerName = prompt ("玩家名 只取前7个字符");
+        playerName = playerName.slice(0,7);
+        var thisScore = [score,playerName];}
+        var __scores = _scores.split(",");
+        for(var i = 0; i<__scores.length; i+=2){
+            let j = i/2;
+            scores[j] = [];
+            scores[j][0] = __scores[i];
+            scores[j][1] = __scores[i+1];
+        }
+        if(score>=0) scores.push(thisScore);
+        rearrange(scores);
+        localStorage.setItem("scores",scores.toString());
+        switch(mode){
+            case 1:
+                localStorage.setItem("scores1",scores.toString());
+                break;
+            case 2:
+                localStorage.setItem("scores2",scores.toString());
+                break;
+            case 3:
+                localStorage.setItem("scores3",scores.toString());
+                break;
+        }
+        highScores.innerHTML = "<tr><th>No.</th><th>Hero</th><th>Score</th></tr>";
+        let firstFive = scores.length>5?5:scores.length;
+        for (var s=0 ; s < firstFive ; s ++){
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            td1.innerHTML = (s + 1)+"  ";
+            tr.appendChild(td1);
+            let td2 = document.createElement("td");
+            td2.innerHTML = scores[s][1];
+            tr.appendChild(td2);
+            let td3 = document.createElement("td");
+            td3.innerHTML = scores[s][0];
+            tr.appendChild(td3);
+            highScores.appendChild(tr);
+        }
+    }
+    function rearrange(array) {
+        var copy = array;
+        var len = array.length;
+        for (var a=0 ; a<len ; a++){
+            for (var b=a ; b<len ;b++){
+                if(copy[a][0]-copy[b][0]<0){
+                    var c = copy[a];
+                    copy[a] = copy[b];
+                    copy[b] = c;
+                }
+            }
+        }
+        scores = copy;
+    }
+
+    var moveLeftFlag=false,moveRightFlag=false;
+
+    setInterval("if(moveLeftFlag) {t.moveInRow(-1);dropStart = Date.now();drawMap();}",60);
+    setInterval("if(moveRightFlag) {t.moveInRow(1);dropStart = Date.now();drawMap();}",60);
+
+    /* div:按键 */
+
+    document.onkeyup = function(e){
+        if((!game.pause&&!game.end)||GM_enable){
+            switch(e.keyCode){
+                case 65://a
+                    moveLeftFlag=false;
+                    break;
+                case 68://d
+                    moveRightFlag=false;
+                    break;
+                case 37://←
+                    moveLeftFlag=false;
+                    break;
+                case 39://→
+                    moveRightFlag=false;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    document.onkeydown = function(e){
+        if((!game.pause&&!game.end)||GM_enable){
+            switch(e.keyCode){
+                case 65://a
+                    moveLeftFlag=true;
+                    break;
+                case 68://d
+                    moveRightFlag=true;
+                    break;
+                case 83://s
+                    t.moveInColumn(1);
+                    break;
+                case 87://w
+                    t.rotate();            
+                    break;
+                case 37://←
+                    moveLeftFlag=true;
+                    break;
+                case 39://→
+                    moveRightFlag=true;
+                    break;
+                case 40://↓
+                    t.moveInColumn(1);
+                    break;
+                case 38://↑
+                    t.rotate();            
+                    break;
+                default:
+                    break;
+            }
+            dropStart = Date.now();
+            drawMap();
+        }
+        if(e.keyCode==32){
+            if(game.end){
+                game.start();
+            }
+            else{
+                if(game.pause) game.pause = false;
+                else game.pause = true;
+            }
+        }
+        switch(e.keyCode){
+            case 49:
+                game.start(1);
+                break;
+            case 50:
+                game.start(2);
+                break;
+            case 51:
+                game.start(3);
+                break;       
+            default:
+                break;      
+        }
+        if(e.keyCode==70){
+            if(GM_enable){
+                sendAlerter("GM模式已关闭");
+                GM_enable=false;
+                document.getElementById("footer").innerHTML = " <!-- 标准 --> <h1>W</h1> <h2>旋转</h2> <h1>A</h1> <h2>向左</h2> <h1>S</h1> <h2>向下</h2> <h1>D</h1> <h2>向右</h2> <h1 style='font-size:15px;'>空格</h1> <h2>暂停/继续</h2> <h1>F</h1> <h2>开启GM模式</h2>"
+            }
+            else{
+                sendAlerter("GM模式已开启");
+                GM_enable=true;
+                document.getElementById("footer").innerHTML = " <!-- GM模式 --> <h1>F</h1> <h2>关闭GM模式</h2> <h1>G</h1> <h2>直接输</h2> <h1>E</h1> <h2>向上走</h2> <h1>H</h1> <h2>直接+50分</h2> <h1>I</h1> <h2>变棍子</h2> "
+            }
+        }
+
+        if(GM_enable)  {
+            if(e.keyCode==71) {game.goToEnd();}//g==71
+            if(e.keyCode==72) {game.score+=50;game.checkScore();}//H==72
+            if(e.keyCode==69) {t.moveInColumn(-1);drawMap();}//e==69
+            if(e.keyCode==73) {
+                t.undraw();
+                t.state=1;
+                t.type=types(6);
+                t.style=6;
+                t.activeTetris = t.type[t.state];
+                t.draw()
+                drawMap();
+            }//i==73
+        }
+    document.getElementById("title").style.display = "none";
+
+    }
+</script>
+<script>//div:背景
+$(function(){
+	// 初始化 传入dom id
+	var victor = new Victor("container", "output");
+	var theme = [
+			["#8E5D68", "#1F466E"],
+			["#002c4a", "#005584"],
+			["#35ac03", "#3f4303"],
+			["#ac0908", "#cd5726"],
+			["#18bbff", "#00486b"]
+		]
+	$(".color li").each(function(index, val) {
+		var color = theme[index];
+		 $(this).mouseover(function(){
+			victor(color).set();
+		 })
+	});
+	victor(theme[0]).set();
+
+});
+</script>
+</html>
+
+
+<!-- 
+    
+        .style0{
+            background-color: #ffffff00;
+        }
+        .style1{
+            background-color: #515B85;
+        }
+        .style2{
+            background-color: #4E7485;
+        }
+        .style3{
+            background-color: #85724F;
+        }
+        .style4{
+            background-color: #808350;
+        }
+        .style5{
+            background-color: #508272;
+        }
+        .style6{
+            background-color: #845E4F;
+        }
+        .style7{
+            background-color: #A866A8;
+        }
+
+
+
+        
+        .style0{
+            background-color: #ffffff00;
+        }
+        .style1{
+            background-color: #E500BF;
+        }
+        .style2{
+            background-color: #05DCB9;
+        }
+        .style3{
+            background-color: #CDEB0E;
+        }
+        .style4{
+            background-color: #5A4CEA;
+        }
+        .style5{
+            background-color: #038DEB;
+        }
+        .style6{
+            background-color: #61E204;
+        }
+        .style7{
+            background-color: #E03404;
+        }
+ -->
+
+
+ <!-- 
+        .style99{ background-color: hsl(0, 0%, 50%); } 
+        .style0{ background-color: #ffffff00; } 
+        .style1{ background-color: hsl(310, 98%, 45%); } 
+        .style2{ background-color: hsl(170, 96%, 44%); } 
+        .style3{ background-color: hsl(68, 89%, 49%); } 
+        .style4{ background-color: hsl(245, 79%, 61%); } 
+        .style5{ background-color: hsl(204, 97%, 47%); } 
+        .style6{ background-color: hsl(95, 97%, 45%); } 
+        .style7{ background-color: hsl(13, 96%, 45%); } 
+        .style8{ background-color: hsl(300, 91%, 40%); } 
+        .style9{ background-color: hsl(53, 86%, 40%); }  
+        .style10{ background-color: hsl(261, 98%, 49%); } 
+        .style11{ background-color: hsl(120, 98%, 49%); } 
+ -->
